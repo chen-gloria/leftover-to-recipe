@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="d-flex flex-column">
+        <div class="card shadow-sm my-3 bg-white border-dark d-block">
+            <div class="card-header bg-white border-0">
+                <div class="row">
+                    <div class="col col-md-8">
+                        <div class="row">
+                            <div class="col">
+                                <h3>Title</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-8 pr-0 d-none d-md-block">
+                                <div class="row mt-2">
+                                    <div class="col">
+                                        <small class="lmap-readonly-important">Some name</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="row my-n1">
+                                    <div class="col">
+                                        {# Note: In Bootstrap 5 there is line height class, at some point, we will upgrade to Bootstrap 5. #}
+                                        <small>Blah blah blah</small>
+                                    </div>
+                                </div>
+                                <div class="row my-n1">
+                                    <div class="col">
+                                        <small>Blah blah blah</small>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <small>Blah blah blah</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4 text-center my-2">
+                                <div class="row d-flex align-items-center">
+                                    <div class="col-8 d-md-none text-left">
+                                        <div class="row">
+                                            <div class="col">
+                                                <span class="lmap-readonly-important">
+                                                    Something
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row my-3">
+                                            <div class="col">
+                                                <img 
+                                                    alt="LOGO"
+                                                    src="profilePic"
+                                                    width="50"
+                                                    height="50"
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <h4>Some name</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-12">
+                                        <div class="row">
+                                            <div class="col">
+                                                <i class="fas fa-users fa-3x"></i>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col">
+                                                <span>Okay</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row text-left d-md-none">
+                                    <div class="col">
+                                        Wah lah wah lah wah lah
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-1 d-block d-md-none">
+                                <div class="row mt-md-2">
+                                    <div class="col">
+                                        <small class="lmap-readonly-important">A big name</small>
+                                    </div>
+                                </div>
+                                <div class="row my-n1">
+                                    <div class="col">
+                                        <small>Blah blah blah</small>
+                                    </div>
+                                </div>
+                                <div class="row my-n1">
+                                    <div class="col">
+                                        <small>Blah blah blah</small>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <small>Blah blah blah</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col col-md-4 d-none d-md-block">
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                <span class="lmap-readonly-important">
+                                    Blash baljs
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <div class="col d-flex justify-content-center">
+                                <img 
+                                    alt="LOGO"
+                                    src=""
+                                    width="50"
+                                    height="50"
+                                >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                <h4>Lah lah</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                Location name
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body bg-transparent border-0 pt-0">
+                <a class="btn btn-info text-white w-100" href="{{ path('take_picture') }}" >
+                    Take a picture for your leftover food
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

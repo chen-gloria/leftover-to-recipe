@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leftover to recipe{% endblock %}
+
+{% block body %}
+    <div class="row my-2">
+        <div class="col">
+            <a 
+                href={{ path('basic_info') }} 
+                class="h5 text-info"
+                style="text-decoration: none;"
+                >
+                <i class="fas fa-arrow-circle-left text-info"></i>
+                Return to basic info
+            </a>
+        </div>
+    </div>
+
+    <div class="card-body bg-transparent border-0 pt-0">
+        <div id="picture-scanner-container" class="col-12 col-md-8 container-fluid d-flex flex-column justify-content-center align-items-center mb-4 p-2">
+            <div>
+                <video playsinline id="picture-scanner" class="container" />
+            </div>
+            <form 
+                id="picture-scanner-form"
+                method="POST"
+                action="{{ path('generate_ingeredients') }}"
+            >
+                <input 
+                    id="picture-scanner-input"
+                    type="hidden" 
+                    name="customer-id-input"
+                    value=""
+                />
+
+                <button class="btn btn-info px-4 mt-4">
+                    Commence generating process
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
