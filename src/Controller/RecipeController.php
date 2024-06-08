@@ -75,30 +75,52 @@ class RecipeController extends AbstractController
         $recipes = [
             [
                 'title' => 'Tempeh Stir-Fry',
+                'summary' => 'Loreama dasdasdasdasd asd ',
                 'isHealthy' => true,
                 'ingredients' => [ "Tempeh", "Red chili peppers", "Green chili peppers", "Basil leaves", "Ginger", "Garlic", "Lemongrass", "Kaffir lime leaves", "Soy sauce" ],
                 'instructions' => [ "1. Slice the tempeh into thin strips.", "2. Heat a pan over medium heat and add a bit of oil.", "3. Add minced garlic, ginger, and lemongrass to the pan and sauté until fragrant.", "4. Add the sliced tempeh to the pan and stir-fry until it starts to turn golden brown.", "5. Add sliced red and green chili peppers, kaffir lime leaves, and a splash of soy sauce.", "6. Stir-fry for a few more minutes until everything is well combined and the tempeh is fully cooked.", "7. Garnish with fresh basil leaves before serving." ]
             ],
             [
                 'title' => 'Fried Tempeh with Spicy Peanut Sauce',
+                'summary' => 'Loreama dasdasdasdasd asd ',
                 'isHealthy' => false,
                 'ingredients' => [ "Tempeh", "Red chili peppers", "Green chili peppers", "Garlic", "Coconut (for coconut milk)", "Peanuts", "Palm sugar", "Soy sauce", "Chili paste", "Fried shallots", "Tamarind" ],
                 'instructions' => [ "1. Slice the tempeh into thin strips.", "2. Heat a generous amount of oil in a pan over medium-high heat and fry the tempeh until crispy and golden brown. Drain on paper towels.", "3. In a separate pan, prepare the spicy peanut sauce.", "4. Blend the peanuts, garlic, red and green chili peppers, and some tamarind into a paste.", "5. Add the paste to the pan and cook over medium heat, adding a bit of coconut milk to thin it out.", "6. Add palm sugar, soy sauce, and chili paste to the sauce and simmer until thick and creamy.", "7. Serve the fried tempeh with the spicy peanut sauce drizzled over the top and garnished with fried shallots." ]
             ]
         ];
 
-        return $this->redirectToRoute('get_recipes', [
+        return $this->redirectToRoute('recipes_summmary', [
             'recipes' => $recipes
         ]);
     }
 
-    #[Route('/recipes', name: 'get_recipes', methods: ['GET'])]
+    #[Route('/recipes', name: 'recipes_summmary', methods: ['GET'])]
     public function getRecipes(Request $request): Response
     {
         $recipes = $request->get('recipes');
 
-        return $this->render('_step_4_get_recipes.html.twig', [
+        return $this->render('_step_4_get_recipes_summmary.html.twig', [
             'recipes' => $recipes
+        ]);
+    }
+
+    #[Route('/recipe', name: 'recipe_details', methods: ['GET'])]
+    public function showFinalRecipeDetails(Request $request): Response
+    {
+        $selectedRecipe = $request->get('selectedRecipe');
+
+        // Transfer to a json array and push to the FE
+        $recipe = [
+            'title' => 'Fried Tempeh with Spicy Peanut Sauce',
+            'summary' => 'Loreama dasdasdasdasd asd ',
+            'isHealthy' => false,
+            'ingredients' => [ "Tempeh", "Red chili peppers", "Green chili peppers", "Garlic", "Coconut (for coconut milk)", "Peanuts", "Palm sugar", "Soy sauce", "Chili paste", "Fried shallots", "Tamarind" ],
+            'instructions' => [ "1. Slice the tempeh into thin strips.", "2. Heat a generous amount of oil in a pan over medium-high heat and fry the tempeh until crispy and golden brown. Drain on paper towels.", "3. In a separate pan, prepare the spicy peanut sauce.", "4. Blend the peanuts, garlic, red and green chili peppers, and some tamarind into a paste.", "5. Add the paste to the pan and cook over medium heat, adding a bit of coconut milk to thin it out.", "6. Add palm sugar, soy sauce, and chili paste to the sauce and simmer until thick and creamy.", "7. Serve the fried tempeh with the spicy peanut sauce drizzled over the top and garnished with fried shallots." ]
+        ];
+
+        $this->addFlash("success", "Congratulations! This recipe has been added to your recipe book.");
+        return $this->render('_step_5_recipe_details.html.twig', [
+            'recipe' => $recipe
         ]);
     }
 }
