@@ -36,18 +36,32 @@ class RecipeController extends AbstractController
          */
         $ingredientsImageBase64 = $request->get('ingredients_img_base_64');
         $removedPrefixImageBase64 = str_replace('data:image/png;base64,', '', $ingredientsImageBase64);
-
-        $result     = $this->openAIService->getIngredients($removedPrefixImageBase64);
-        $resultBody = json_decode($result);
-
-        $choicesContent = str_replace(["```json", "\n", "```"] , "", ($resultBody->choices)[0]->message->content);
-        
-        $jsonIngredietsList = json_decode($choicesContent);
-
-        // Add the ingredients list to the getRecipes method
-        // Get the names from AI Prompt
-        $ingredients = $jsonIngredietsList->ingredients;
-      
+    
+        try {
+            $result = $this->openAIService->getIngredients($removedPrefixImageBase64);
+            $resultBody = json_decode($result);
+    
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new \Exception('Invalid JSON response from OpenAIService.');
+            }
+    
+            $choicesContent = str_replace(["```json", "\n", "```"] , "", ($resultBody->choices)[0]->message->content);
+            $jsonIngredientsList = json_decode($choicesContent);
+    
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new \Exception('Invalid JSON content in OpenAIService response.');
+            }
+    
+            // Add the ingredients list to the getRecipes method
+            // Get the names from AI Prompt
+            $ingredients = $jsonIngredientsList->ingredients;
+        } catch (\Exception $e) {    
+            // flash message for the user
+            $this->addFlash('danger', 'Error parsing ingredients list. Please try a different photo.');
+    
+            return $this->redirectToRoute('get_camera');
+        }
+    
         /**
          * Comment this out for non-AI prompt testing
          */
@@ -57,11 +71,12 @@ class RecipeController extends AbstractController
         //     'Banana',
         //     'Donut'
         // ];
-
+    
         return $this->redirectToRoute('get_ingredients', [
             'ingredients' => $ingredients
         ]);
     }
+    
 
     #[Route('/ingredients', name: 'get_ingredients', methods: ['GET'])]
     public function getIngredients(Request $request): Response

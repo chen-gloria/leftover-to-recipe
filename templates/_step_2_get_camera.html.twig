@@ -4,9 +4,29 @@
 
 {% block javascripts %}
     <script type="module" src="{{ asset('js/camera.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() { // hide message after 5s or click captureButton
+            setTimeout(function() {
+                $('.alert').alert('close');
+            }, 5000);
+            $('#captureButton').click(function() {
+                $('.alert').alert('close');
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block body %}
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <div class="row my-2">
         <div class="col">
             <a 
