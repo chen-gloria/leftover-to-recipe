@@ -6,12 +6,19 @@
     <script type="module" src="{{ asset('js/camera.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        $(document).ready(function() { // hide message after 5s or click captureButton
+        $(document).ready(function() { 
+            // Hide message after 5s or click captureButton
             setTimeout(function() {
                 $('.alert').alert('close');
             }, 5000);
             $('#captureButton').click(function() {
                 $('.alert').alert('close');
+            });
+
+            // Show loading spinner on form submission
+            $('#picture-scanner-form').submit(function() {
+                $('#loading-overlay').removeClass('d-none');
+                $('#commenceIdentifyingIngredientsBtn').prop('disabled', true);
             });
         });
     </script>
@@ -63,6 +70,26 @@
                     Start identifying ingredients
                 </button>
             </form>
+
+            <!-- Loading spinner -->
+            <div id="loading-overlay" class="d-none">
+                <div class="spinner-border text-info" role="status"></div>
+            </div>
         </div>
     </div>
+
+    <style>
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(128, 128, 128, 0.5); /* Gray background with transparency */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+    </style>
 {% endblock %}
