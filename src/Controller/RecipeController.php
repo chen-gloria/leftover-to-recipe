@@ -2,11 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Ingredient;
-use App\Entity\Recipe;
-use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,8 +11,6 @@ class RecipeController extends AbstractController
 {
     public function __construct
     (
-        protected ManagerRegistry $doctrine,
-        private readonly EntityManagerInterface $em
     )
     {}
 
@@ -65,8 +58,10 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/recipes', name: 'generate_recipes', methods: ['POST'])]
-    public function generateRecipes(): Response
+    public function generateRecipes(Request $request): Response
     {
+        $ingredients = $request->get('ingredients');
+        
         // Have some steps...
         // AI Prompt...
         // Generate recipes

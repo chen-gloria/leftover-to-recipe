@@ -26,7 +26,7 @@
                     <div class="row">
                         {% for ingredient in ingredients %}
                             <div class="col col-md-6">
-                                <p>{{ ingredient }}</p>
+                                <input type="text" name="ingredients[]" class="ingredient-name border-0" value="{{ ingredient }}">
                             </div>
                         {% endfor %}
                     </div>
