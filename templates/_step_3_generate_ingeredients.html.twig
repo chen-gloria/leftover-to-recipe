@@ -2,6 +2,10 @@
 
 {% block title %}Leftover to recipe{% endblock %}
 
+{% block javascripts %}
+    <script type="module" src="{{ asset('js/ingredient.js') }}"></script>
+{% endblock %}
+
 {% block body %}
     <div class="row my-2">
         <div class="col">
@@ -26,7 +30,7 @@
                     <div class="row">
                         {% for ingredient in ingredients %}
                             <div class="col col-md-6">
-                                <p>{{ ingredient }}</p>
+                                <input type="text" name="ingredients[]" class="ingredient-name border-0" value="{{ ingredient }}">
                             </div>
                         {% endfor %}
                     </div>
