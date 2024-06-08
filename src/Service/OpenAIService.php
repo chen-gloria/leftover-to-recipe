@@ -63,7 +63,7 @@ class OpenAIService
         $model = 'gpt-4o';
 
         $url = 'https://api.openai.com/v1/chat/completions';
-        $preferences = "Have nut allergies, and prefer vegan recipes.";
+        $preferences = "";
 
         $data = [
             'model' => $model,
