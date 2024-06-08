@@ -23,12 +23,19 @@
         <div class="d-flex flex-column">
             <div class="card shadow-sm my-3 bg-white border-dark d-block">
                 <div class="card-header bg-white border-0">
-                    <div class="row">
+                    <div class="row" id="ingredients-list">
                         {% for ingredient in ingredients %}
-                            <div class="col col-md-6">
+                            <div class="col col-md-6 mb-2">
                                 <input type="text" name="ingredients[]" class="ingredient-name border-0" value="{{ ingredient }}" autocomplete="off">
                             </div>
                         {% endfor %}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" id="add-ingredient" class="btn btn-success">
+                              <i class="fa-solid fa-circle-plus"> </i>  Add Ingredient
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -40,4 +47,14 @@
             </div>
         </div>
     </form>
+
+    <script>
+        document.getElementById('add-ingredient').addEventListener('click', function() {
+            var ingredientsList = document.getElementById('ingredients-list');
+            var newIngredientDiv = document.createElement('div');
+            newIngredientDiv.className = 'col col-md-6 mb-2';
+            newIngredientDiv.innerHTML = '<input placeholder="add ingredient..." type="text" name="ingredients[]" class="ingredient-name border-0" value="" autocomplete="off">';
+            ingredientsList.appendChild(newIngredientDiv);
+        });
+    </script>
 {% endblock %}
