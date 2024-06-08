@@ -120,7 +120,7 @@ class RecipeController extends AbstractController
             }
         } catch (\Exception $e) {    
             // flash message for the user
-            $this->addFlash('danger', 'We can not detect the ingredients from your camera - or there is something wrong in the server :(. Please try again.');
+            $this->addFlash('danger', 'We can not detect the ingredients from your camera - or there is something wrong in the server :(. Please try again or contact us for support.');
     
             return $this->redirectToRoute('get_camera');
         }

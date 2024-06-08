@@ -235,3 +235,25 @@
 .selected {
     box-shadow: 0 0 10px 0 rgba(39, 153, 245, 0.8) !important; /* Blue shadow effect */
 }
+
+.stars {
+    display: inline-block;
+}
+
+.stars input[type="radio"] {
+    display: none;
+}
+
+.stars label {
+    font-size: 40px !important;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.stars label:before {
+    content: '★';
+}
+
+.stars-radio.checked + label {
+    color: gold;
+}
