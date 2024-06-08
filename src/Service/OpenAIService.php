@@ -76,8 +76,9 @@ class OpenAIService
                         Given the following ingredients list: $ingrediets_list.
 
                         User preferences/allergies: $preferences.
-
+                        
                         Generate recipes (along with the ingredients), return at least 2 recipies, one which is healthy, and one which is unhealthy.
+                        Restrict the recipes with the ingredients provided above.
                         
                         Return Dish Title, Ingredients and Instructions in JSON.
 
