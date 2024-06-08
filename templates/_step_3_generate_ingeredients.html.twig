@@ -19,6 +19,7 @@
     <form 
         method="POST"
         action="{{ path('generate_recipes') }}"
+        id="recipe-form"
         >
         <div class="d-flex flex-column">
             <div class="card shadow-sm my-3 bg-white border-dark d-block">
@@ -48,6 +49,11 @@
         </div>
     </form>
 
+    <!-- Loading spinner -->
+    <div id="loading-overlay" class="d-none">
+        <div class="spinner-border text-info" role="status"></div>
+    </div>
+
     <script>
         document.getElementById('add-ingredient').addEventListener('click', function() {
             var ingredientsList = document.getElementById('ingredients-list');
@@ -56,5 +62,24 @@
             newIngredientDiv.innerHTML = '<input placeholder="add ingredient..." type="text" name="ingredients[]" class="ingredient-name border-0" value="" autocomplete="off">';
             ingredientsList.appendChild(newIngredientDiv);
         });
+
+        document.getElementById('recipe-form').addEventListener('submit', function() {
+            document.getElementById('loading-overlay').classList.remove('d-none');
+        });
     </script>
+
+    <style>
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(128, 128, 128, 0.5); /* Gray background with transparency */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+    </style>
 {% endblock %}
