@@ -26,6 +26,17 @@
                                     <div class="col">
                                         {{ recipe.Title }}
                                     </div>
+                                    <div class="col-12 col-sm-4 pr-sm-0">
+                                        {% if recipe.IsHealthy %}
+                                            <span class="text-white badge py-2 px-2 bg-success font-larger d-inline-flex align-items-center justify-content-center" style="width:100%; min-height:100%">
+                                                Healthy
+                                            </span>
+                                        {% else %}
+                                            <span class="text-dark badge py-2 px-2 bg-warning font-larger d-inline-flex align-items-center justify-content-center" style="width:100%; min-height:100%">
+                                                Relax
+                                            </span>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
 
