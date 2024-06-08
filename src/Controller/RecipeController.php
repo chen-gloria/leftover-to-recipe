@@ -31,20 +31,33 @@ class RecipeController extends AbstractController
     #[Route('/ingredients', name: 'generate_ingeredients', methods: ['POST'])]
     public function generateIngredients(Request $request): Response
     {
-        $ingredientsImageBase64 = $request->get('ingredients_img_base_64');
-        $removedPrefixImageBase64 = str_replace('data:image/png;base64,', '', $ingredientsImageBase64);
+        /**
+         * This is the real AI prompt code
+         */
+        // $ingredientsImageBase64 = $request->get('ingredients_img_base_64');
+        // $removedPrefixImageBase64 = str_replace('data:image/png;base64,', '', $ingredientsImageBase64);
 
-        $result     = $this->openAIService->getIngredients($removedPrefixImageBase64);
-        $resultBody = json_decode($result);
+        // $result     = $this->openAIService->getIngredients($removedPrefixImageBase64);
+        // $resultBody = json_decode($result);
 
-        $choicesContent = str_replace(["```json", "\n", "```"] , "", ($resultBody->choices)[0]->message->content);
+        // $choicesContent = str_replace(["```json", "\n", "```"] , "", ($resultBody->choices)[0]->message->content);
         
-        $json_ingrediets_list = json_decode($choicesContent);
+        // $jsonIngredietsList = json_decode($choicesContent);
 
-        // Add the ingredients list to the getRecipes method
-        // Get the names from AI Prompt
-        $ingredients = $json_ingrediets_list->ingredients;
+        // // Add the ingredients list to the getRecipes method
+        // // Get the names from AI Prompt
+        // $ingredients = $jsonIngredietsList->ingredients;
       
+        /**
+         * Comment this out for non-AI prompt testing
+         */
+        $ingredients = [
+            'Apple',
+            'Pear',
+            'Banana',
+            'Donut'
+        ];
+
         return $this->redirectToRoute('get_ingredients', [
             'ingredients' => $ingredients
         ]);
@@ -63,14 +76,41 @@ class RecipeController extends AbstractController
     #[Route('/recipes', name: 'generate_recipes', methods: ['POST'])]
     public function generateRecipes(Request $request): Response
     {
-        $ingredients = $request->get('ingredients');
-        $recipes     = $this->openAIService->getRecipes(json_encode($ingredients));
-        $recipesBody = json_decode($recipes);
+        /**
+         * This is the real AI prompt code
+         */
+        // $ingredients = $request->get('ingredients');
+        // $recipes     = $this->openAIService->getRecipes(json_encode($ingredients));
+        // $recipesBody = json_decode($recipes);
 
-        $recipesContent = str_replace(["```json", "\n", "```"] , "", ($recipesBody->choices)[0]->message->content);
+        // $recipesContent = str_replace(["```json", "\n", "```"] , "", ($recipesBody->choices)[0]->message->content);
+
+        // return $this->redirectToRoute('recipes_summmary', [
+        //     'recipes' => json_decode($recipesContent)
+        // ]);
+
+        /**
+         * Comment this out for non-AI prompt testing
+         */
+        $recipesContent = [
+            [
+                'Title' => 'Tempeh Stir-Fry',
+                'Summary' => 'Loreama dasdasdasdasd asd ',
+                'IsHealthy' => true,
+                'Ingredients' => [ "Tempeh", "Red chili peppers", "Green chili peppers", "Basil leaves", "Ginger", "Garlic", "Lemongrass", "Kaffir lime leaves", "Soy sauce" ],
+                'Instructions' => [ "1. Slice the tempeh into thin strips.", "2. Heat a pan over medium heat and add a bit of oil.", "3. Add minced garlic, ginger, and lemongrass to the pan and sauté until fragrant.", "4. Add the sliced tempeh to the pan and stir-fry until it starts to turn golden brown.", "5. Add sliced red and green chili peppers, kaffir lime leaves, and a splash of soy sauce.", "6. Stir-fry for a few more minutes until everything is well combined and the tempeh is fully cooked.", "7. Garnish with fresh basil leaves before serving." ]
+            ],
+            [
+                'Title' => 'Fried Tempeh with Spicy Peanut Sauce',
+                'Summary' => 'Loreama dasdasdasdasd asd ',
+                'IsHealthy' => false,
+                'Ingredients' => [ "Tempeh", "Red chili peppers", "Green chili peppers", "Garlic", "Coconut (for coconut milk)", "Peanuts", "Palm sugar", "Soy sauce", "Chili paste", "Fried shallots", "Tamarind" ],
+                'Instructions' => [ "1. Slice the tempeh into thin strips.", "2. Heat a generous amount of oil in a pan over medium-high heat and fry the tempeh until crispy and golden brown. Drain on paper towels.", "3. In a separate pan, prepare the spicy peanut sauce.", "4. Blend the peanuts, garlic, red and green chili peppers, and some tamarind into a paste.", "5. Add the paste to the pan and cook over medium heat, adding a bit of coconut milk to thin it out.", "6. Add palm sugar, soy sauce, and chili paste to the sauce and simmer until thick and creamy.", "7. Serve the fried tempeh with the spicy peanut sauce drizzled over the top and garnished with fried shallots." ]
+            ]
+        ];
 
         return $this->redirectToRoute('recipes_summmary', [
-            'recipes' => json_decode($recipesContent)
+            'recipes' => $recipesContent
         ]);
     }
 
