@@ -19,7 +19,7 @@
             {{ include('_include/head_navbar.html.twig') }}
         {% endblock %}
 
-        <main class="container-fluid h-100" style="max-width: 980px;">
+        <main class="container-fluid h-100 pb-5" style="max-width: 980px;">
             <div class="global" scroll-top="0"></div>
             <div class="row">
                 <div class="col px-0">
@@ -38,6 +38,10 @@
                 </div>
             </div>
         </main>
+
+        {% block footer %}
+            
+        {% endblock %}
 
         {% block body_javascript %}
             <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
