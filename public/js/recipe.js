@@ -19,6 +19,6 @@ $(document).ready(function () {
     })
 
     confirmRecipeBtn.on('click', function(e) {
-        $('.recipe-card.selected').closest('form').submit();
+        $('.recipe-card.selected').find('form').submit();
     })
 })
