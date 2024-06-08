@@ -3,8 +3,6 @@
 namespace App\Service;
 
 use Exception;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class OpenAIService
 {

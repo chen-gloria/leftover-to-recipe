@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leftover to recipe{% endblock %}
+
+{% block javascripts %}
+    <script type="module" src="{{ asset('js/recipe.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="row my-2">
+        <div class="col">
+            <a href={{ path('get_camera') }} class="h5 text-info" style="text-decoration: none;">
+                <i class="fas fa-arrow-circle-left text-info"></i>
+                Generate a new recipe
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="recipe-card card shadow-sm my-3 bg-white border-dark d-block">
+                <div class="card-header bg-white border-0">
+                    <div class="row">
+                        <div class="col">
+                            <h4>{{ recipe.isHealthy ? 'Healthy' : 'Relax' }} - {{ recipe.title }}
+                            </h4>
+                        </div>
+                        <div class="col d-flex justify-content-end align-items-center">
+                            <a class="text-info" style="cursor:pointer;">
+                                Share <i class="fa-solid fa-share-from-square text-info"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body bg-transparent border-0 pt-0">
+                    <h5>Ingredients:</h5>
+
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-unstyled">
+                                {% for ingredient in recipe.ingredients %}
+                                    <li>{{ ingredient }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                        
+                    <h5>Instructions:</h5>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-unstyled">
+                                {% for instruction in recipe.instructions %}
+                                    <li style="width: 100%;">{{ instruction }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
