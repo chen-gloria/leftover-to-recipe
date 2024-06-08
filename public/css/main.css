@@ -243,3 +243,7 @@
     border-radius: 5px;
     margin-top: 20px;
 }
+
+.selected {
+    box-shadow: 0 0 10px 0 rgba(39, 153, 245, 0.8) !important; /* Blue shadow effect */
+}
