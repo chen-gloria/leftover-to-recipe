@@ -1,0 +1,106 @@
+<h3><i class="fa-solid fa-people-group"></i> Community</h3>
+
+<div class="row">
+    {% for friend_post in friend_posts %}
+        <div class="col-12 col-sm-6">
+            <div class="card shadow-sm my-3 bg-white border-dark d-block">
+                <div class="card-header bg-white border-0">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-12 col-md-8 pr-0 d-none d-md-block">
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <h5>Allergies:</h5>
+                                            <p style="font-size: 13.5px;">{{ friend_post.allergies }}</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row my-n1">
+                                        <div class="col">
+                                            {# Note: In Bootstrap 5 there is line height class, at some point, we will upgrade to Bootstrap 5. #}
+                                            <h5>Preferences:</h5>
+                                            <p style="font-size: 13.5px;">{{ friend_post.preferences }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 text-center my-2">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-8 d-md-none text-left">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h5>Allergies:</h5>
+                                                    <p style="font-size: 13.5px;">{{ friend_post.allergies }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h5>
+                                                        Preferences:
+                                                    </h5>
+                                                    <p style="font-size: 13.5px;">{{ friend_post.preferences }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 col-md-12 d-md-none">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <img 
+                                                        alt="LOGO"
+                                                        src="{{ asset('img/profile.png') }}"
+                                                        width="50"
+                                                        height="50"
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col">
+                                                    <h4>{{ friend_post.name }}</h4>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col d-flex justify-content-center">
+                                                    📍{{ friend_post.city }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col col-md-3 d-none d-md-block px-0">
+                            <div class="row my-3">
+                                <div class="col d-flex justify-content-center">
+                                    <img 
+                                        alt="LOGO"
+                                        src="{{ asset('img/profile.png') }}"
+                                        width="50"
+                                        height="50"
+                                    >
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-flex justify-content-center">
+                                    <h4>{{ friend_post.name }}</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-flex justify-content-center">
+                                    📍 {{ friend_post.city }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row my-n1">
+                        <div class="col">
+                            <span class="text-info" style="font-size: 13.5px;"> {{ friend_post.hash_tags }} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

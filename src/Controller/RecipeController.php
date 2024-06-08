@@ -19,7 +19,73 @@ class RecipeController extends AbstractController
     #[Route('/', name: 'basic_info', methods: ['GET'])]
     public function home(): Response
     {
-        return $this->render('_step_1_basic_info.html.twig');
+        // Dummy data
+        $friendPosts = [
+            [
+                'name' => 'Bryce',
+                'city' => 'Canberra',
+                'profile_url' => '',
+                'recipe_title' => 'Spicy Thai Basil Chicken',
+                'recipe_summary' => 'A zesty stir-fry dish with tender chicken, fresh basil, and fiery Thai chilies, seasoned with garlic and soy sauce.',
+                'allergies' => 'Contains soy; avoid if allergic.',
+                'preferences' => 'Asian cuisine enthusiasts; spicy food lovers.',
+                'hash_tags' => '#ThaiFlavors, #FieryDelight, #QuickStirFry'
+            ],
+            [
+                'name' => 'Daniel',
+                'city' => 'Sydney',
+                'profile_url' => '',
+                'recipe_title' => 'Mediterranean Quinoa Salad',
+                'recipe_summary' => 'A colorful mix of quinoa, cherry tomatoes, cucumbers, olives, and feta cheese, tossed in a lemon-herb vinaigrette.',
+                'allergies' => 'Contains dairy (feta)',
+                'preferences' => 'Vegetarians; Mediterranean cuisine aficionados.',
+                'hash_tags' => '#MediterraneanEats, #FreshAndLight'
+            ],
+            [
+                'name' => 'Nissan',
+                'city' => 'Brisbane',
+                'profile_url' => '',
+                'recipe_title' => 'Black Bean Tacos',
+                'recipe_summary' => 'Warm tortillas filled with spicy black beans, fresh salsa, avocado slices, and tangy lime crema. ',
+                'allergies' => 'Contains gluten (tortillas)',
+                'preferences' => 'Mexican food enthusiasts; vegetarian-friendly option.',
+                'hash_tags' => '#TacoTuesday, #MexicanCuisine, #SpicyBeans'
+            ],
+            [
+                'name' => 'Akhil',
+                'city' => 'Perth',
+                'profile_url' => '',
+                'recipe_title' => 'Lemon Garlic Shrimp Pasta',
+                'recipe_summary' => 'Succulent shrimp sautéed in a garlic-infused olive oil, tossed with al dente pasta, lemon zest, and fresh parsley.',
+                'allergies' => 'Contains shellfish',
+                'preferences' => 'Seafood lovers; Italian cuisine admirers.',
+                'hash_tags' => '#SeafoodPasta, #GarlicShrimp'
+            ],
+            [
+                'name' => 'Jordi H.',
+                'city' => 'Melbourne',
+                'profile_url' => '',
+                'recipe_title' => 'Vegan Chickpea Curry',
+                'recipe_summary' => 'Hearty chickpeas simmered in a creamy coconut curry sauce with onions, tomatoes, and a blend of aromatic spices.',
+                'allergies' => 'Contains coconut.',
+                'preferences' => 'Vegans; lovers of Indian flavors.',
+                'hash_tags' => '#VeganComfort, #CurryLove, #PlantBasedEats'
+            ],
+            [
+                'name' => 'Jan Z.',
+                'city' => 'Singapore',
+                'profile_url' => '',
+                'recipe_title' => 'BBQ Pulled Pork Sandwiches',
+                'recipe_summary' => 'Tender slow-cooked pork shoulder, shredded and smothered in smoky barbecue sauce, piled high on soft brioche buns.',
+                'allergies' => 'Contains gluten (buns)',
+                'preferences' => 'BBQ aficionados; meat lovers.',
+                'hash_tags' => '#BBQClassic, #PulledPork'
+            ]
+        ];
+
+        return $this->render('_step_1_basic_info.html.twig', [
+            'friend_posts' => $friendPosts
+        ]);
     }
 
     #[Route('/camera', name: 'get_camera', methods: ['GET'])]
