@@ -21,7 +21,12 @@ class OpenAIService
                     'role' => 'user', 
                     'content' => [
                         ['type' => 'text', 'text' => <<<EOF
-                        Extract the ingrediets present in the image.
+                        Extract the ingredients present in the image. The input image could be a photo of ingredients or a reciept of ingredients.
+                        
+                        Return the ingredients in the following format:
+                        {
+                            "ingredients": ["Red beans", "Spinach", "Olives", ...]
+                        }
 
                         JSON:
                         EOF],
@@ -58,6 +63,7 @@ class OpenAIService
         $model = 'gpt-4o';
 
         $url = 'https://api.openai.com/v1/chat/completions';
+        $preferences = "Have nut allergies, and prefer vegan recipes.";
 
         $data = [
             'model' => $model,
@@ -67,7 +73,9 @@ class OpenAIService
                     'role' => 'user', 
                     'content' => [
                         ['type' => 'text', 'text' => <<<EOF
-                        Given the following ingredients list: $ingrediets_list
+                        Given the following ingredients list: $ingrediets_list.
+
+                        User preferences/allergies: $preferences.
 
                         Generate recipes (along with the ingredients), return at least 2 recipies, one which is healthy, and one which is unhealthy.
                         
