@@ -18,23 +18,25 @@
 
     <div class="card-body bg-transparent border-0 pt-0">
         <div id="picture-scanner-container" class="col-12 col-md-8 container-fluid d-flex flex-column justify-content-center align-items-center mb-4 p-2">
-            <div>
-                <video playsinline id="picture-scanner" class="container" />
-            </div>
+            <div id="camera"></div>
+            <button class="btn btn-info px-4 mt-4" id="captureButton">Capture</button>
+            <img id="capturedImage" alt="Captured Image">
+
+            <button class="btn btn-info px-4 mt-4 d-none" id="recaptureBtn">Recapture</button>
             <form 
                 id="picture-scanner-form"
                 method="POST"
                 action="{{ path('generate_ingeredients') }}"
             >
                 <input 
-                    id="picture-scanner-input"
+                    id="ingredients-image-base64"
                     type="hidden" 
-                    name="customer-id-input"
+                    name="ingredients_img_base_64"
                     value=""
                 />
 
-                <button class="btn btn-info px-4 mt-4">
-                    Commence generating process
+                <button type="submit" id="commenceIdentifyingIngredientsBtn" class="btn btn-info px-4 mt-4 d-none">
+                    Start identifying ingredients
                 </button>
             </form>
         </div>

@@ -1,73 +1,52 @@
-const spinnerDiv = `
-    <div class="spinner-border"
-        role="status"
-        style="position:absolute;"
-    >
-    </div>
-`;
+const video = document.createElement('video');
+const cameraView = document.getElementById('camera');
+const captureButton = document.getElementById('captureButton');
+const capturedImage = document.getElementById('capturedImage');
+const recaptureBtn  = document.getElementById('recaptureBtn');
+const commenceIdentifyingIngredientsBtn = document.getElementById('commenceIdentifyingIngredientsBtn');
+const ingredientsImageBase64Input = document.getElementById('ingredients-image-base64');
 
-const cameraAccessDeniedParagraph = `
-    <div class="card alert-card border-alert-error border-callout-left rounded-0 py-4 pl-2">
-        <div class="row">
-            <div class="col">
-                <span class="p-2">
-                    Access to camera required to take photos.
-                    </br>
-                    Please grant access to camera for the browser. 
-                </span>
-            </div>
-        </div>
-    </div>
-`;
+let stream;
 
-$(document).ready(function () {
-    const pictureScannerContainer = $("#picture-scanner-container");
-
-    pictureScannerContainer.prepend(spinnerDiv);
-
-    try {
-        window['BarcodeDetector'].getSupportedFormats()
-    } catch {
-        window['BarcodeDetector'] = barcodeDetectorPolyfill.BarcodeDetectorPolyfill
-    }
-      
-    (async () => {
-        const stream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: {
-                ideal: "environment"
-                }
-            },
-            audio: false
+function startCamera() {
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (mediaStream) {
+            stream = mediaStream;
+            video.srcObject = mediaStream;
+            cameraView.appendChild(video);
+            video.play();
+        })
+        .catch(function (err) {
+            console.error('Error accessing camera:', err);
         });
- 
-        const videoEl = document.querySelector("#picture-scanner");
-        videoEl.srcObject = stream;
-        await videoEl.play();
-        
-        $("#picture-scanner-container").find('div.spinner-border').remove();
-        
-        const barcodeDetector = new BarcodeDetector({formats: ['qr_code']});
-        
-        const qrScannerForm = document.querySelector('#picture-scanner-form');
-        const qrScannerInput = document.querySelector('#picture-scanner-input');
+}
 
-        const barcodeScanInterval = window.setInterval(async () => {
-            const barcodes = await barcodeDetector.detect(videoEl);
-            if (barcodes.length <= 0) return;
-              
-            const customerId = barcodes[0].rawValue;
-            qrScannerInput.setAttribute('value', customerId);
+function resetCamera() {
+    recaptureBtn.classList.add("d-none");
+    commenceIdentifyingIngredientsBtn.classList.add("d-none");
+    capturedImage.style.display = 'none';
+    video.style.display = 'block';
+    captureButton.style.display = 'block';
+    capturedImage.src = '';
+    startCamera();
+}
 
-            qrScannerForm.submit();
-            window.clearInterval(barcodeScanInterval);
-        }, 100)
-    })();
+startCamera();
 
-    navigator.permissions.query({ name: "camera" }).then(res => {
-        if (res.state !== "granted") {
-            qrScannerContainer.find('div.spinner-border').remove();
-            qrScannerContainer.append(cameraAccessDeniedParagraph);
-        }
-    });
+captureButton.addEventListener('click', function () {
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+    capturedImage.src = canvas.toDataURL('image/png');
+    capturedImage.style.display = 'block';
+    video.style.display = 'none';
+    captureButton.style.display = 'none';
+    stream.getTracks().forEach(track => track.stop());
+    recaptureBtn.classList.remove("d-none");
+    commenceIdentifyingIngredientsBtn.classList.remove("d-none");
+    // Set the image base 64 to the input
+    ingredientsImageBase64Input.value = canvas.toDataURL('image/png');
 });
+
+recaptureBtn.addEventListener('click', resetCamera);
