@@ -5,6 +5,7 @@ const selectedRecipeIdInput = $('#selectedRecipeIdInput');
 $(document).ready(function () {
     recipeLink.click(function(event) {
         confirmRecipeBtn.removeClass('d-none');
+
         $(this).closest('.recipe-card').addClass('selected');
         let selectedId = $(this).attr('id');
 
@@ -15,7 +16,9 @@ $(document).ready(function () {
                 $(this).closest('.recipe-card').removeClass('selected');
             } 
         });
+    })
 
-        selectedRecipeIdInput.val(selectedId);
+    confirmRecipeBtn.on('click', function(e) {
+        $('.recipe-card.selected').closest('form').submit();
     })
 })

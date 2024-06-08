@@ -18,36 +18,48 @@
 
     <div class="row">
         {% for recipe in recipes %}
-            <div class="col col-6">
-                <div class="recipe-card card shadow-sm my-3 bg-white border-dark d-block"  style="max-height: 80%;">
-                    <a id="recipeLink{{ loop.index }}" class="card-link text-dark recipe-link" style="cursor: pointer;">
-                        <div class="card-header bg-white border-0">
-                            <div class="row">
-                                <div class="col">
-                                    {{ recipe.title }}
+
+                
+                <div class="col col-6">
+                    <div class="recipe-card card shadow-sm my-3 bg-white border-dark d-block" style="max-height: 80%;">
+                        <a id="recipeLink{{ loop.index }}" class="card-link text-dark recipe-link" style="cursor: pointer;">
+                            <div class="card-header bg-white border-0">
+                                <div class="row">
+                                    <div class="col">
+                                        {{ recipe.Title }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="card-body bg-transparent border-0 pt-0">
-                            <h5>Summary:</h5>
-                            <p>{{ recipe.summary }}</p>
-                        </div>
-                    </a>
+                            <div class="card-body bg-transparent border-0 pt-0">
+                                <h5>Summary:</h5>
+                                <p>{{ recipe.Summary }}</p>
+                            </div>
+                        </a>
+
+                        <form 
+                            method="GET"
+                            action="{{ path('recipe_details') }}"
+                            >
+                            {% for ingredient in recipe.Ingredients %}
+                                <input type="hidden" name="selectedRecipe[ingredients][]" value="{{ ingredient }}" />
+                            {% endfor %}
+
+                            {% for instruction in recipe.Instructions %}
+                                <input type="hidden" name="selectedRecipe[instructions][]" value="{{ instruction }}" />
+                            {% endfor %}
+
+                            <input type="hidden" name="selectedRecipe[isHealthy]" value="{{ recipe.IsHealthy }}" />
+                            <input type="hidden" name="selectedRecipe[title]" value="{{ recipe.Title }}" />
+                        </form>
+                    </div>
                 </div>
-            </div>
+
+            
         {% endfor %}
     </div>
 
-
-    <form 
-        method="GET"
-        action="{{ path('recipe_details') }}"
-        >
-        <input type="hidden" name="selectedRecipeId" id="selectedRecipeIdInput" value="" />
-        <button id="confirmRecipeBtn" type="submit" class="btn btn-info text-white w-100 d-none">
-            Confirm the recipes and show the details
-        </button>
-    </form>
-    
+    <button id="confirmRecipeBtn" type="button" class="btn btn-info text-white w-100 d-none">
+        Confirm the recipes and show the details
+    </button>
 {% endblock %}
