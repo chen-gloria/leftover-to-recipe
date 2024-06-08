@@ -6,12 +6,12 @@
     <div class="row my-2">
         <div class="col">
             <a 
-                href={{ path('basic_info') }} 
+                href={{ path('get_camera') }} 
                 class="h5 text-info"
                 style="text-decoration: none;"
                 >
                 <i class="fas fa-arrow-circle-left text-info"></i>
-                Return to basic info
+                Return to camera
             </a>
         </div>
     </div>
@@ -26,7 +26,7 @@
                     <div class="row">
                         {% for ingredient in ingredients %}
                             <div class="col col-md-6">
-                                <p>{{ ingredient.name }}</p>
+                                <p>{{ ingredient }}</p>
                             </div>
                         {% endfor %}
                     </div>
