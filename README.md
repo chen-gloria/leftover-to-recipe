@@ -3,10 +3,16 @@ Transform your leftovers into delicious meals, reduce food waste, and help you d
 ### Leftover to Recipe
 **Build Together Hackathon 2024 - Building for a Better World**
 
-Our project is dedicated to tackling the issue of food waste while empowering individuals to manage their food consumption efficiently. By leveraging AI technology, we aim to create a sustainable solution that benefits both people and the environment.
+With 783 million people going hungry globally, an equivalent of one billion meals are wasted every day. According to the UN Environment Programme’s Food Waste Index Report 2024, 1.05 billion tonnes of food are wasted annually. This waste occurs across retail, food service, and household. Most of the world’s food waste comes from households, totalling 631 million tonnes.
+
+![Food Waste Pie Chart](public/img/foodwastePiechart.png)
+
+Our project is dedicated to tackling the issue of households food waste while empowering individuals to manage their food consumption efficiently. By leveraging AI technology, we aim to create a sustainable solution that benefits both people and the environment.
 
 ### Project Description
 Our project is designed with a dual purpose: to reduce food waste and help individuals keep track of the food they consume and have in their inventory. By utilizing AI image recognition and data management, our app offers a comprehensive solution for smarter food management.
+
+![leftover to recipe logo](public/logo.png)
 
 **Key Features:**
 
