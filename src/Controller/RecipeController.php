@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\OpenAIService;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -106,21 +107,17 @@ class RecipeController extends AbstractController
         try {
             $result = $this->openAIService->getIngredients($removedPrefixImageBase64);
             $resultBody = json_decode($result);
-    
-            // if (json_last_error() !== JSON_ERROR_NONE) {
-            //     throw new \Exception('Invalid JSON response from OpenAIService.');
-            // }
-    
+
             $choicesContent = str_replace(["```json", "\n", "```"] , "", ($resultBody->choices)[0]->message->content);
             $jsonIngredientsList = json_decode($choicesContent);
-    
-            // if (json_last_error() !== JSON_ERROR_NONE) {
-            //     throw new \Exception('Invalid JSON content in OpenAIService response.');
-            // }
     
             // Add the ingredients list to the getRecipes method
             // Get the names from AI Prompt
             $ingredients = $jsonIngredientsList->ingredients;
+
+            if (empty($ingredients)) {
+                throw new Exception("No ingredients found.");
+            }
         } catch (\Exception $e) {    
             // flash message for the user
             $this->addFlash('danger', 'We can not detect the ingredients from your camera - or there is something wrong in the server :(. Please try again.');
