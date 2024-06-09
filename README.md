@@ -121,6 +121,6 @@ Successful result:
 | URL | Method  | Role Permission | Description  |
 |---|---|---|---|
 | / | GET  | Any | Basic info |
-| /picture | GET  | Any | Take a picture of your leftovers | 
+| /camera | GET  | Any | Get camera and take a picture of your leftovers | 
 | /ingredients | GET | Any | Get all the ingredients from the picture |
 | /recipes | POST  | Any | Get the recipes from the ingredients |
