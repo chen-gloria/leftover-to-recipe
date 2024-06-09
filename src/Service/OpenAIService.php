@@ -2,13 +2,18 @@
 
 namespace App\Service;
 
-use Exception;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class OpenAIService
 {
+    public function __construct(
+        private readonly ParameterBagInterface $params
+    ) {
+    }
+
     public function getIngredients($base64_image)
     {
-        $api_key = 'sk-proj-yWBgHL8vXd8PpFU9t4zeT3BlbkFJETKZx0RhaChMYlZxYvyn';
+        $api_key = $this->params->get('OPEN_AI_KEY');
         $model = 'gpt-4o';
 
         $url = 'https://api.openai.com/v1/chat/completions';
@@ -59,7 +64,7 @@ class OpenAIService
 
     public function getRecipes($ingrediets_list)
     {
-        $api_key = 'sk-proj-yWBgHL8vXd8PpFU9t4zeT3BlbkFJETKZx0RhaChMYlZxYvyn';
+        $api_key = $this->params->get('OPEN_AI_KEY');
         $model = 'gpt-4o';
 
         $url = 'https://api.openai.com/v1/chat/completions';
