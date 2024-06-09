@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Throwable;
 
 class RecipeController extends AbstractController
 {
@@ -118,7 +119,7 @@ class RecipeController extends AbstractController
             if (empty($ingredients)) {
                 throw new Exception("No ingredients found.");
             }
-        } catch (\Exception $e) {    
+        } catch (Throwable $e) {    
             // flash message for the user
             $this->addFlash('danger', 'We can not detect the ingredients from your camera - or there is something wrong in the server :(. Please try again or contact us for support.');
     
@@ -157,15 +158,20 @@ class RecipeController extends AbstractController
         /**
          * This is the real AI prompt code
          */
-        $ingredients = $request->get('ingredients');
-        $recipes     = $this->openAIService->getRecipes(json_encode($ingredients));
-        $recipesBody = json_decode($recipes);
+        try {
+            $ingredients = $request->get('ingredients');
+            $recipes     = $this->openAIService->getRecipes(json_encode($ingredients));
+            $recipesBody = json_decode($recipes);
 
-        $recipesContent = str_replace(["```json", "\n", "```"] , "", ($recipesBody->choices)[0]->message->content);
+            $recipesContent = str_replace(["```json", "\n", "```"] , "", ($recipesBody->choices)[0]->message->content);
 
-        return $this->redirectToRoute('recipes_summmary', [
-            'recipes' => json_decode($recipesContent)
-        ]);
+            return $this->redirectToRoute('recipes_summmary', [
+                'recipes' => json_decode($recipesContent)
+            ]);
+        } catch (Throwable $e) {
+            $this->addFlash('danger', 'We can not generate recipe for now - there is something wrong in the server :(. Please try again or contact us for support.');
+            return $this->redirectToRoute('get_camera');
+        }
 
         /**
          * Comment this out for non-AI prompt testing
