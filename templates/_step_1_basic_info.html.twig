@@ -1,7 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block javascripts %}
+    <script type="module" src="{{ asset('js/basic_info.js') }}"></script>
+{% endblock %}
 
+{% block body %}
     <div class="d-flex flex-column">
         <div class="alert alert-success badge-success w-100" role="alert">
             <span class="mb-0 d-flex justify-content-center"><strong>Minimise food waste. 🌎 Let's make the world a better place! ✨</strong></span>
@@ -24,7 +27,7 @@
                                 <div class="row mt-2">
                                     <div class="col">
                                         <h5>
-                                            Allergies: <input type="text" class="border-0" value="None" autocomplete="off" />
+                                            Allergies: <input type="text" class="border-0 person-allergies-input" value="None" autocomplete="off" />
                                         </h5>
                                     </div>
                                 </div>
@@ -33,7 +36,7 @@
                                     <div class="col">
                                         {# Note: In Bootstrap 5 there is line height class, at some point, we will upgrade to Bootstrap 5. #}
                                         <h5>
-                                            Preferences: <input type="text" class="border-0" value="Fish, Veggies" autocomplete="off" />
+                                            Preferences: <input type="text" class="border-0 person-preferences-input" value="Fish, Veggies" autocomplete="off" />
                                         </h5>
                                     </div>
                                 </div>
@@ -49,13 +52,13 @@
                                     <div class="col-8 d-md-none text-left">
                                         <div class="row">
                                             <div class="col">
-                                                <h5>Allergies: <input type="text" class="border-0" value="None" autocomplete="off" /></h5>
+                                                <h5>Allergies: <input type="text" class="border-0 person-allergies-input" value="None" autocomplete="off" /></h5>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <h5>
-                                                    Preferences: <input type="text" class="border-0" value="Fish, Veggies" autocomplete="off" />
+                                                    Preferences: <input type="text" class="border-0 person-preferences-input" value="Fish, Veggies" autocomplete="off" />
                                                 </h5>
                                             </div>
                                         </div>
@@ -118,13 +121,25 @@
             </div>
 
             <div class="card-body bg-transparent border-0 pt-0">
-                <a class="btn btn-info text-white w-100 my-3" href="{{ path('get_ingredients') }}" >
-                    Enter your own ingredients
-                </a>
+                <form
+                    method="GET"
+                    action="{{ path('get_ingredients') }}"
+                >
+                    <input class="personPreferences" type="hidden" name="personPreferences" value="" />
+                    <input class="personAllergies" type="hidden" name="personAllergies" value="" />
+                    <button type="submit" class="btn btn-info text-white w-100 my-3">
+                        Enter your own ingredients
+                    </button>
+                </form>
 
-                <a class="btn btn-info text-white w-100" href="{{ path('get_camera') }}" >
-                    Take a picture for your ingredients or receipt
-                </a>
+                <form
+                    method="GET"
+                    action="{{ path('get_camera') }}"
+                >
+                    <button type="submit" class="btn btn-info text-white w-100" href="{{ path('get_camera') }}" >
+                        Take a picture for your ingredients or receipt
+                    </button>
+                </form>
             </div>
         </div>
     </div>

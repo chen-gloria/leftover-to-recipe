@@ -145,10 +145,15 @@ class RecipeController extends AbstractController
     #[Route('/ingredients', name: 'get_ingredients', methods: ['GET'])]
     public function getIngredients(Request $request): Response
     {
+        $personPreferences = $request->get('personPreferences') ?? "";
+        $personAllergies = $request->get('personAllergies') ?? "";
+
         $ingredients = $request->get('ingredients');
 
         return $this->render('_step_3_generate_ingeredients.html.twig', [
-            'ingredients' => $ingredients
+            'ingredients' => $ingredients,
+            'person_preferences' => $personPreferences,
+            'person_allergies' => $personAllergies
         ]);
     }
 
@@ -160,7 +165,10 @@ class RecipeController extends AbstractController
          */
         try {
             $ingredients = $request->get('ingredients');
-            $recipes     = $this->openAIService->getRecipes(json_encode($ingredients));
+            $personPreferences = $request->get('personPreferences') ?? "";
+            $personAllergies = $request->get('personAllergies') ?? "";
+
+            $recipes     = $this->openAIService->getRecipes(json_encode($ingredients), $personPreferences, $personAllergies);
             $recipesBody = json_decode($recipes);
 
             $recipesContent = str_replace(["```json", "\n", "```"] , "", ($recipesBody->choices)[0]->message->content);
@@ -169,6 +177,7 @@ class RecipeController extends AbstractController
                 'recipes' => json_decode($recipesContent)
             ]);
         } catch (Throwable $e) {
+            
             $this->addFlash('danger', 'We can not generate recipe for now - there is something wrong in the server :(. Please try again or contact us for support.');
             return $this->redirectToRoute('get_camera');
         }

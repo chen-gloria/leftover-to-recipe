@@ -62,13 +62,12 @@ class OpenAIService
         return $response;
     }
 
-    public function getRecipes($ingrediets_list)
+    public function getRecipes($ingrediets_list, $personReferences = "", $personAllergies = "")
     {
         $api_key = $this->params->get('OPEN_AI_KEY');
         $model = 'gpt-4o';
 
         $url = 'https://api.openai.com/v1/chat/completions';
-        $preferences = "";
 
         $data = [
             'model' => $model,
@@ -80,7 +79,8 @@ class OpenAIService
                         ['type' => 'text', 'text' => <<<EOF
                         Given the following ingredients list: $ingrediets_list.
 
-                        User preferences/allergies: $preferences.
+                        User preferences: $personReferences.
+                        User allergies: $personAllergies.
                         
                         Generate recipes (along with the ingredients), return at least 2 recipies, one which is healthy, and one which is unhealthy.
                         Restrict the recipes with the ingredients provided above.
