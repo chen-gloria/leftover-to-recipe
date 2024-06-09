@@ -2,16 +2,15 @@
   🍉 🫒 🥕 🌽 🌶️ 🫑 🥒 🥬 🥦 🧄 🧅 &nbsp;&nbsp;⮕⮕&nbsp;&nbsp;🍜 🍲 🥘 🍛 🥗
 </p>
 
-Turn your leftover ingredients into delectable meals, minimize food waste, and simplify meal decisions with Leftover to Recipe, your ultimate kitchen companion!
+<h2>
+    <p align="center">
+      Leftover to Recipe
+      <br />
+      Build Together Hackathon 2024 - Building for a Better World
+    </p>
+</h2>
 
-
-  <h2>
-      <p align="center">
-        Leftover to Recipe
-        <br />
-        Build Together Hackathon 2024 - Building for a Better World
-      </p>
-  </h2>
+> 📢 Turn your leftover ingredients into delectable meals, minimize food waste, and simplify meal decisions with Leftover to Recipe, your ultimate kitchen companion! -- Leftover to Recipe Team
 
 
 ## Background
