@@ -4,7 +4,7 @@
 
 Turn your leftover ingredients into delectable meals, minimize food waste, and simplify meal decisions with Leftover to Recipe, your ultimate kitchen companion!
 
-<p align="center">
+<p style="text-align: center;">
   <h2>
     Leftover to Recipe
     <br />
@@ -35,11 +35,7 @@ Our project is designed with a dual purpose: to reduce food waste and help indiv
   <span style="color: grey;"><i>Our Logo</i></span>
 </p>
 
-<p align="center">
-  <video src="public/video/demo_0609.mp4" width="600" controls>
-  </video>
-</p>
-
+[![Demo](https://github.com/chen-gloria/leftover-to-recipe/blob/master/public/video/demo_0609.mp4)](https://github.com/chen-gloria/leftover-to-recipe/blob/master/public/video/demo_0609.mp4)
 
 ## 🌎 How does this make the world better?
 - **1. Environmental Impact:**
