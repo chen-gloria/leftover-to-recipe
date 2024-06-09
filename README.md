@@ -6,7 +6,7 @@
     <p align="center">
       Leftover to Recipe
       <br />
-      Build Together Hackathon 2024 - Building for a Better World
+      Build Together AI Hackathon 2024 - Building for a Better World
     </p>
 </h2>
 
@@ -14,7 +14,7 @@
 
 
 ## Background
-**According to [United Nations News](https://news.un.org/en/story/2024/03/1148036#:~:text=UNEP%20report%20reveals.-,With%20783%20million%20people%20going%20hungry%2C%20a%20fifth,all%20food%20goes%20to%20waste&text=While%20a%20third%20of%20humanity,of%20food%20is%20thrown%20away.), with 783 million people going hungry globally, an equivalent of one billion meals are wasted every day. According to the UN Environment Programme’s Food Waste Index Report 2024, 1.05 billion tonnes of food are wasted annually. This waste occurs across retail, food service, and household. Most of the world’s food waste comes from households, totalling 631 million tonnes.**
+**According to [United Nations News](https://news.un.org/en/story/2024/03/1148036#:~:text=UNEP%20report%20reveals.-,With%20783%20million%20people%20going%20hungry%2C%20a%20fifth,all%20food%20goes%20to%20waste&text=While%20a%20third%20of%20humanity,of%20food%20is%20thrown%20away.), with 783 million people going hungry globally, an equivalent of one billion meals are wasted every day. According to the [UN Environment Programme’s Food Waste Index Report 2024](https://wedocs.unep.org/handle/20.500.11822/45230), 1.05 billion tonnes of food are wasted annually. This waste occurs across retail, food service, and household. Most of the world’s food waste comes from households, totalling 631 million tonnes.**
 
 <p align="center">
   <img src="public/img/globalFoodwasteStats.png" width=550 />
@@ -100,7 +100,7 @@ By addressing the critical issue of food waste and promoting efficient food mana
 
 ### 1. What is in the stack?
 
-We use [Symfony](https://symfony.com/), a PHP framework using for website app development for front end and back end development. OpenAi key is encrypted and stored in the app.
+We use [Symfony](https://symfony.com/), a PHP framework using for website app development for front end and back end development.
 
 ### 2. How to run this app in your local?
 
@@ -124,7 +124,7 @@ scoop install symfony-cli
 ```bash
 composer install
 
->>>
+>>>>>>
 
 Installing dependencies from lock file (including require-dev)
 Verifying lock file contents can be installed on current platform.
@@ -148,7 +148,7 @@ Executing script importmap:install [OK]
 ```bash
 symfony server:start
 
->>>
+>>>>>>
 
  [OK] Web server listening                                                                                              
       The Web server is using PHP FPM 8.3.6                                                                             
