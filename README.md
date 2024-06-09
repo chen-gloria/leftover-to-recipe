@@ -28,15 +28,18 @@ Our project is dedicated to tackling the issue of households food waste while em
 
 ## Project Description
 
+### Purposes
 Our project is designed with a dual purpose: to reduce food waste and help individuals keep track of the food they consume and have in their inventory. By utilising AI image recognition and data management, our app offers a comprehensive solution for smarter food management.
 
+### Logo
 <p align="center">
   <img src="public/logo.png" width=250 />
   <br />
   <span style="color: grey;"><i>Our Logo</i></span>
 </p>
 
-[![Watch the demo](/public/img/videoSnap.png)](https://www.loom.com/share/2de3bbc5607249a69c222a95f3721988?sid=86a9a667-85fe-412f-ab26-2463c5b45285)
+### Demo video
+[![Watch the demo](/public/img/videoSnap.png)](https://www.loom.com/share/2de3bbc5607249a69c222a95f3721988?sid=86a9a667-85fe-412f-ab26-2463c5b45285 "Demo video")
 
 ## 🌎 How does this make the world better?
 - **1. Environmental Impact:**
