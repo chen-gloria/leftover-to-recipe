@@ -36,6 +36,8 @@ Our project is designed with a dual purpose: to reduce food waste and help indiv
   <span style="color: grey;"><i>Our Logo</i></span>
 </p>
 
+[![Watch the demo](/public/img/videoSnap.png)](https://www.loom.com/share/2de3bbc5607249a69c222a95f3721988?sid=86a9a667-85fe-412f-ab26-2463c5b45285)
+
 ## 🌎 How does this make the world better?
 - **1. Environmental Impact:**
   - Reduces the carbon footprint associated with food waste.
