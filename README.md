@@ -44,6 +44,7 @@ Our project is designed with a dual purpose: to reduce food waste and help indiv
 - **Community Sharing:**
   - Users can share excess food items with the community.
   - Promotes a sharing economy and reduces overall food waste.
+  - Users can share there status and recipe.
 
 - **Nutritional Information:**
   - The app provides detailed nutritional information for each food item and recipe.
@@ -104,7 +105,7 @@ Executing script importmap:install [OK]
 
 #### 5. Start the Symfony server
 ```bash
-gloriachen$ symfony server:start
+symfony server:start
 ```
 
 Successful result:
