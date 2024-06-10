@@ -27,7 +27,7 @@
                                 <div class="row mt-2">
                                     <div class="col">
                                         <h5>
-                                            Allergies: <input type="text" class="border-0 person-allergies-input" value="None" autocomplete="off" />
+                                            Allergies: <input type="text" class="border-0 person-allergies-input" value="No allergies" autocomplete="off" />
                                         </h5>
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                                     <div class="col">
                                         {# Note: In Bootstrap 5 there is line height class, at some point, we will upgrade to Bootstrap 5. #}
                                         <h5>
-                                            Preferences: <input type="text" class="border-0 person-preferences-input" value="Fish, Veggies" autocomplete="off" />
+                                            Preferences: <input type="text" class="border-0 person-preferences-input" value="No preferences" autocomplete="off" />
                                         </h5>
                                     </div>
                                 </div>
@@ -52,13 +52,13 @@
                                     <div class="col-8 d-md-none text-left">
                                         <div class="row">
                                             <div class="col">
-                                                <h5>Allergies: <input type="text" class="border-0 person-allergies-input" value="None" autocomplete="off" /></h5>
+                                                <h5>Allergies: <input type="text" class="border-0 person-allergies-input" value="No allergies" autocomplete="off" /></h5>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <h5>
-                                                    Preferences: <input type="text" class="border-0 person-preferences-input" value="Fish, Veggies" autocomplete="off" />
+                                                    Preferences: <input type="text" class="border-0 person-preferences-input" value="No preferences" autocomplete="off" />
                                                 </h5>
                                             </div>
                                         </div>
@@ -125,7 +125,7 @@
                     method="GET"
                     action="{{ path('get_ingredients') }}"
                 >
-                    <input class="personPreferences" type="hidden" name="personPreferences" value="Fish, Veggies" />
+                    <input class="personPreferences" type="hidden" name="personPreferences" value="" />
                     <input class="personAllergies" type="hidden" name="personAllergies" value="" />
                     <button type="submit" class="btn btn-info text-white w-100 my-3">
                         Enter your own ingredients
@@ -136,7 +136,7 @@
                     method="GET"
                     action="{{ path('get_camera') }}"
                 >
-                    <input class="personPreferences" type="hidden" name="personPreferences" value="Fish, Veggies" />
+                    <input class="personPreferences" type="hidden" name="personPreferences" value="" />
                     <input class="personAllergies" type="hidden" name="personAllergies" value="" />
                     <button type="submit" class="btn btn-info text-white w-100" href="{{ path('get_camera') }}" >
                         Take a picture for your ingredients or receipt

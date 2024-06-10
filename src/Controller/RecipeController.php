@@ -132,7 +132,10 @@ class RecipeController extends AbstractController
             // flash message for the user
             $this->addFlash('danger', 'We can not detect the ingredients from your camera - or there is something wrong in the server :(. Please try again or contact us for support.');
     
-            return $this->redirectToRoute('get_camera');
+            return $this->redirectToRoute('get_camera', [
+                'personPreferences' => $personPreferences,
+                'personAllergies' => $personAllergies
+            ]);
         }
     
         /**
@@ -146,11 +149,12 @@ class RecipeController extends AbstractController
         // ];
     
         return $this->redirectToRoute('get_ingredients', [
-            'ingredients' => $ingredients
+            'ingredients' => $ingredients,
+            'personPreferences' => $personPreferences,
+            'personAllergies' => $personAllergies
         ]);
     }
     
-
     #[Route('/ingredients', name: 'get_ingredients', methods: ['GET'])]
     public function getIngredients(Request $request): Response
     {
@@ -159,7 +163,7 @@ class RecipeController extends AbstractController
 
         $ingredients = $request->get('ingredients');
 
-        return $this->render('_step_3_generate_ingeredients.html.twig', [
+        return $this->render('_step_3_get_ingeredients.html.twig', [
             'ingredients' => $ingredients,
             'person_preferences' => $personPreferences,
             'person_allergies' => $personAllergies

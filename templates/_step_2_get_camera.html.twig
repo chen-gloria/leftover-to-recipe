@@ -47,38 +47,43 @@
         </div>
     </div>
 
-    <div class="card-body bg-transparent border-0 pt-0">
-        <div id="picture-scanner-container" class="col-12 col-md-8 container-fluid d-flex flex-column justify-content-center align-items-center mb-4 p-2">
-            <div id="camera"></div>
-            <button class="btn btn-info px-4 mt-4" id="captureButton">Capture</button>
-            <img id="capturedImage" alt="Captured Image">
+    <form 
+        id="picture-scanner-form"
+        method="POST"
+        action="{{ path('generate_ingeredients') }}"
+    >
+        <div class="card-body bg-transparent border-0 pt-0">
+            <div class="col-12 col-md-8 container-fluid">
+                <p>
+                    <strong>Preferences:</strong><input class="border-0" type="text" autocomplete="off" name="personPreferences" value="{{ person_preferences is same as "" ? "No preferences" : person_preferences }}" />
+                    <br />
+                    <strong>Allergies:</strong><input class="border-0" type="text" autocomplete="off" name="personAllergies" value="{{ person_allergies is same as "" ? "No allergies" : person_allergies }}" />
+                </p>
+            </div>
+            <div id="picture-scanner-container" class="col-12 col-md-8 container-fluid d-flex flex-column justify-content-center align-items-center mb-4 p-2">
+                <div id="camera"></div>
+                <button type="button" class="btn btn-info px-4 mt-4" id="captureButton">Capture</button>
+                <img id="capturedImage" alt="Captured Image">
 
-            <button class="btn btn-info px-4 mt-4 d-none" id="recaptureBtn">Recapture</button>
-            <form 
-                id="picture-scanner-form"
-                method="POST"
-                action="{{ path('generate_ingeredients') }}"
-            >
-                <input type="hidden" name="personPreferences" value="{{ person_preferences }}" />
-                <input type="hidden" name="personAllergies" value="{{ person_allergies }}" />
-                <input 
-                    id="ingredients-image-base64"
-                    type="hidden" 
-                    name="ingredients_img_base_64"
-                    value=""
-                />
+                <button type="button" class="btn btn-info px-4 mt-4 d-none" id="recaptureBtn">Recapture</button>
+                    <input 
+                        id="ingredients-image-base64"
+                        type="hidden" 
+                        name="ingredients_img_base_64"
+                        value=""
+                    />
 
-                <button type="submit" id="commenceIdentifyingIngredientsBtn" class="btn btn-info px-4 mt-4 d-none">
-                    Start identifying ingredients
-                </button>
-            </form>
+                    <button type="submit" id="commenceIdentifyingIngredientsBtn" class="btn btn-info px-4 mt-4 d-none">
+                        Start identifying ingredients
+                    </button>
 
-            <!-- Loading spinner -->
-            <div id="loading-overlay" class="d-none">
-                <div class="spinner-border text-info" role="status"></div>
+                <!-- Loading spinner -->
+                <div id="loading-overlay" class="d-none">
+                    <div class="spinner-border text-info" role="status"></div>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <style>
         #loading-overlay {
