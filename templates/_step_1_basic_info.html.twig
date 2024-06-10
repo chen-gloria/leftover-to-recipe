@@ -125,7 +125,7 @@
                     method="GET"
                     action="{{ path('get_ingredients') }}"
                 >
-                    <input class="personPreferences" type="hidden" name="personPreferences" value="" />
+                    <input class="personPreferences" type="hidden" name="personPreferences" value="Fish, Veggies" />
                     <input class="personAllergies" type="hidden" name="personAllergies" value="" />
                     <button type="submit" class="btn btn-info text-white w-100 my-3">
                         Enter your own ingredients
@@ -136,6 +136,8 @@
                     method="GET"
                     action="{{ path('get_camera') }}"
                 >
+                    <input class="personPreferences" type="hidden" name="personPreferences" value="Fish, Veggies" />
+                    <input class="personAllergies" type="hidden" name="personAllergies" value="" />
                     <button type="submit" class="btn btn-info text-white w-100" href="{{ path('get_camera') }}" >
                         Take a picture for your ingredients or receipt
                     </button>

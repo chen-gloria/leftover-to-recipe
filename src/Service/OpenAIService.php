@@ -11,7 +11,7 @@ class OpenAIService
     ) {
     }
 
-    public function getIngredients($base64_image)
+    public function getIngredients($base64_image, $personReferences = "", $personAllergies = "")
     {
         $api_key = $this->params->get('OPEN_AI_KEY');
         $model = 'gpt-4o';
@@ -28,6 +28,9 @@ class OpenAIService
                         ['type' => 'text', 'text' => <<<EOF
                         Extract the ingredients present in the image. The input image could be a photo of ingredients or a reciept of ingredients.
                         
+                        User preferences: $personReferences.
+                        User allergies: $personAllergies.
+
                         Return the ingredients in the following format:
                         {
                             "ingredients": ["Red beans", "Spinach", "Olives", ...]
@@ -58,7 +61,7 @@ class OpenAIService
         $response = curl_exec($ch);
         curl_close($ch);
 
-        echo $response;
+        // echo $response;
         return $response;
     }
 
@@ -127,7 +130,7 @@ class OpenAIService
         $response = curl_exec($ch);
         curl_close($ch);
 
-        echo $response;
+        // echo $response;
         return $response;
     }
 }
