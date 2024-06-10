@@ -91,9 +91,15 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/camera', name: 'get_camera', methods: ['GET'])]
-    public function getCamera(): Response
+    public function getCamera(Request $request): Response
     {
-        return $this->render('_step_2_get_camera.html.twig');
+        $personPreferences = $request->get('personPreferences') ?? "";
+        $personAllergies = $request->get('personAllergies') ?? "";
+
+        return $this->render('_step_2_get_camera.html.twig', [
+            'person_preferences' => $personPreferences,
+            'person_allergies' => $personAllergies
+        ]);
     }
 
     #[Route('/ingredients', name: 'generate_ingeredients', methods: ['POST'])]
@@ -105,8 +111,11 @@ class RecipeController extends AbstractController
         $ingredientsImageBase64 = $request->get('ingredients_img_base_64');
         $removedPrefixImageBase64 = str_replace('data:image/png;base64,', '', $ingredientsImageBase64);
     
+        $personPreferences = $request->get('personPreferences') ?? "";
+        $personAllergies = $request->get('personAllergies') ?? "";
+
         try {
-            $result = $this->openAIService->getIngredients($removedPrefixImageBase64);
+            $result = $this->openAIService->getIngredients($removedPrefixImageBase64, $personPreferences, $personAllergies);
             $resultBody = json_decode($result);
 
             $choicesContent = str_replace(["```json", "\n", "```"] , "", ($resultBody->choices)[0]->message->content);
@@ -119,11 +128,14 @@ class RecipeController extends AbstractController
             if (empty($ingredients)) {
                 throw new Exception("No ingredients found.");
             }
-        } catch (Throwable $e) {    
+        } catch (Throwable $e) {
             // flash message for the user
             $this->addFlash('danger', 'We can not detect the ingredients from your camera - or there is something wrong in the server :(. Please try again or contact us for support.');
     
-            return $this->redirectToRoute('get_camera');
+            return $this->redirectToRoute('get_camera', [
+                'personPreferences' => $personPreferences,
+                'personAllergies' => $personAllergies
+            ]);
         }
     
         /**
@@ -137,11 +149,12 @@ class RecipeController extends AbstractController
         // ];
     
         return $this->redirectToRoute('get_ingredients', [
-            'ingredients' => $ingredients
+            'ingredients' => $ingredients,
+            'personPreferences' => $personPreferences,
+            'personAllergies' => $personAllergies
         ]);
     }
     
-
     #[Route('/ingredients', name: 'get_ingredients', methods: ['GET'])]
     public function getIngredients(Request $request): Response
     {
@@ -150,7 +163,7 @@ class RecipeController extends AbstractController
 
         $ingredients = $request->get('ingredients');
 
-        return $this->render('_step_3_generate_ingeredients.html.twig', [
+        return $this->render('_step_3_get_ingeredients.html.twig', [
             'ingredients' => $ingredients,
             'person_preferences' => $personPreferences,
             'person_allergies' => $personAllergies

@@ -24,6 +24,12 @@
         <div class="d-flex flex-column">
             <div class="card shadow-sm my-3 bg-white border-dark d-block">
                 <div class="card-header bg-white border-0">
+                    <p>
+                        <strong>Preferences:</strong><input class="border-0" type="text" autocomplete="off" name="personPreferences" value="{{ person_preferences is same as "" ? "No preferences" : person_preferences }}" />
+                        <br />
+                        <strong>Allergies:</strong><input class="border-0" type="text" autocomplete="off" name="personAllergies" value="{{ person_allergies is same as "" ? "No allergies" : person_allergies }}" />
+                    </p>
+                    
                     <div class="row" id="ingredients-list">
                         {% for ingredient in ingredients %}
                             <div class="col col-md-6 mb-2">
@@ -41,8 +47,6 @@
                 </div>
 
                 <div class="card-body bg-transparent border-0 pt-0">
-                    <input type="hidden" name="personPreferences" value="{{ person_preferences }}" />
-                    <input type="hidden" name="personAllergies" value="{{ person_allergies }}" />
                     <button type="submit" class="btn btn-info text-white w-100">
                         Generate recipes
                     </button>
