@@ -33,7 +33,7 @@ Our project is designed with a dual purpose: to reduce food waste and help indiv
 
 ### Logo
 <p align="center">
-  <img src="public/logo.png" width=250 />
+  <img src="public/img/logo.png" width=250 />
   <br />
   <span style="color: grey;"><i>Our Logo</i></span>
 </p>
