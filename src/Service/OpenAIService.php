@@ -11,7 +11,7 @@ class OpenAIService
     ) {
     }
 
-    public function getIngredients($base64_image, $personReferences = "", $personAllergies = "")
+    public function getIngredients($base64Image, $personReferences = "", $personAllergies = "")
     {
         $api_key = $this->params->get('OPEN_AI_KEY');
         $model = 'gpt-4o';
@@ -38,7 +38,7 @@ class OpenAIService
 
                         JSON:
                         EOF],
-                        ['type' => 'image_url', 'image_url' => ['url' => "data:image/png;base64,$base64_image"]]
+                        ['type' => 'image_url', 'image_url' => ['url' => "data:image/png;base64,$base64Image"]]
                     ]
                 ]
             ],
@@ -65,7 +65,7 @@ class OpenAIService
         return $response;
     }
 
-    public function getRecipes($ingrediets_list, $personReferences = "", $personAllergies = "")
+    public function getRecipes($ingredietsList, $personReferences = "", $personAllergies = "")
     {
         $api_key = $this->params->get('OPEN_AI_KEY');
         $model = 'gpt-4o';
@@ -80,7 +80,7 @@ class OpenAIService
                     'role' => 'user', 
                     'content' => [
                         ['type' => 'text', 'text' => <<<EOF
-                        Given the following ingredients list: $ingrediets_list.
+                        Given the following ingredients list: $ingredietsList.
 
                         User preferences: $personReferences.
                         User allergies: $personAllergies.
