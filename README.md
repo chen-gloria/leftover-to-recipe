@@ -104,12 +104,12 @@ We use [Symfony](https://symfony.com/), a PHP framework using for website app de
 
 ### 2. How to run this app in your local?
 
-First of all, you do need a [OpenAI Key](https://platform.openai.com/) to run the API.
+First of all, you do need a [OpenAI Key](https://platform.openai.com/) 🔒 to utilise the API.
 👉 [How to apply for a OpenAI Key?](https://www.maisieai.com/help/how-to-get-an-openai-api-key-for-chatgpt)
 
 Secondly, run this app up:
 
-A few steps to follow here:
+Here are the steps to follow:
 
 - Step 1: [Install PHP 8.2](https://php.watch/articles/install-php82-ubuntu-debian)
 - Step 2: [Install Composer](https://getcomposer.org/download/), which is used to install PHP packages.
@@ -129,7 +129,7 @@ scoop install symfony-cli
 ```bash
 composer install
 
->>>>>>
+# Result
 
 Installing dependencies from lock file (including require-dev)
 Verifying lock file contents can be installed on current platform.
@@ -159,7 +159,6 @@ php bin/console secrets:set OPEN_AI_KEY
 
  [OK] Secret "OPEN_AI_KEY" encrypted in "config/secrets/dev/"; you can commit it.
 
- >>>>>>
 #  To view the secrets that you just set
 php bin/console secrets:list --reveal
 
@@ -175,7 +174,7 @@ php bin/console secrets:list --reveal
 ```bash
 symfony server:start
 
->>>>>>
+# Result
 
  [OK] Web server listening                                                                                              
       The Web server is using PHP FPM 8.3.6                                                                             
