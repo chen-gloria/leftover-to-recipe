@@ -104,7 +104,12 @@ We use [Symfony](https://symfony.com/), a PHP framework using for website app de
 
 ### 2. How to run this app in your local?
 
-A few steps to follow:
+First of all, you do need a [OpenAI Key](https://platform.openai.com/) to run the API.
+👉 [How to apply for a OpenAI Key?](https://www.maisieai.com/help/how-to-get-an-openai-api-key-for-chatgpt)
+
+Secondly, run this app up:
+
+A few steps to follow here:
 
 - Step 1: [Install PHP 8.2](https://php.watch/articles/install-php82-ubuntu-debian)
 - Step 2: [Install Composer](https://getcomposer.org/download/), which is used to install PHP packages.
@@ -144,7 +149,29 @@ Executing script assets:install public [OK]
 Executing script importmap:install [OK]
 ```
 
-- Step 5: Start the Symfony server
+- Step 5: Before you start the server, set up your OpenAI Key in your local (**⚠️ but be careful, do not push it to Github or create any pull request with it accidentally, keep it secret with you!**)
+
+```bash
+php bin/console secrets:set OPEN_AI_KEY
+
+ Please type the secret value:
+ > 
+
+ [OK] Secret "OPEN_AI_KEY" encrypted in "config/secrets/dev/"; you can commit it.
+
+ >>>>>>
+#  To view the secrets that you just set
+php bin/console secrets:list --reveal
+
+------------- ------------------------------------------------------------ ------------- 
+  Secret        Value                                                        Local Value  
+ ------------- ------------------------------------------------------------ ------------- 
+  OPEN_AI_KEY   "your-key"                
+ ------------- ------------------------------------------------------------ ------------- 
+
+```
+
+- Step 6: Start the Symfony server
 ```bash
 symfony server:start
 
@@ -155,6 +182,6 @@ symfony server:start
       http://127.0.0.1:8000   
 ```
 
-- Step 6: Visit `http://127.0.0.1:8000` or `http://localhost:8000/` to see the project
+- Step 7: Visit `http://127.0.0.1:8000` or `http://localhost:8000/` to see the project
 
 
