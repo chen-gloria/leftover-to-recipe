@@ -38,6 +38,10 @@ Our project is designed with a dual purpose: to reduce food waste and help indiv
   <span style="color: grey;"><i>Our Logo</i></span>
 </p>
 
+### Deployment to heroku
+
+https://leftover-to-recipe-380643b48bf7.herokuapp.com/
+
 ### Demo video 
 
 Use `Command + Click`(in MacOS) or `Ctrl + Click`(in Linux and Windows) to open and watch this video in a new page:
