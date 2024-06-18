@@ -3,6 +3,7 @@
 {% block title %}Leftover to recipe{% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     <script type="module" src="{{ asset('js/recipe.js') }}"></script>
 {% endblock %}
 
@@ -21,7 +22,6 @@
             <h4>Please select a recipe to continue:</h4>
         </div>
     </div>
-
 
     <div class="row">
         {% for recipe in recipes %}
