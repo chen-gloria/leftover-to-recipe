@@ -9,7 +9,7 @@ const ingredientsImageBase64Input = document.getElementById('ingredients-image-b
 let stream;
 
 function startCamera() {
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({video: { facingMode: { ideal: 'environment' } }})
         .then(function (mediaStream) {
             stream = mediaStream;
             video.srcObject = mediaStream;

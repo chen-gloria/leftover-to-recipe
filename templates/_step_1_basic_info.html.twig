@@ -4,22 +4,25 @@
     <script type="module" src="{{ asset('js/basic_info.js') }}"></script>
 {% endblock %}
 
+{% block banner %}
+    <div class="alert alert-success banner-success w-100 text-dark text-center border-0" role="alert">
+        <span class="mb-0 d-flex justify-content-center"><strong>Minimise food waste. 🌎 Let's make the world a better place! ✨</strong></span>
+    </div>
+{% endblock %}
+
 {% block body %}
-    <div class="d-flex flex-column">
-        <div class="alert alert-success badge-success w-100" role="alert">
-            <span class="mb-0 d-flex justify-content-center"><strong>Minimise food waste. 🌎 Let's make the world a better place! ✨</strong></span>
-        </div>
-        <div class="card shadow-sm my-3 bg-white border-dark d-block">
+    <section class="py-4 text-center container">
+        <div class="card shadow-sm">
             <div class="card-header bg-white border-0">
-                <div class="row">
+                <div class="row my-2">
                     <div class="col col-md-8">
                         <div class="row">
                             <div class="col">
-                                <h3>Healthy eater Level 1 ⭐ 
-                                    <span class="text-white badge py-2 px-2 bg-success font-larger d-inline-flex align-items-center justify-content-center">
-                                        Zero Waste Hero
+                                <h3>Healthy eater Level 1
+                                    <span class="text-white badge my-2 px-2 bg-success font-larger d-inline-flex align-items-center justify-content-center">
+                                        Zero Waste Hero ⭐ 
                                     </span>
-                                </h3> 
+                                </h3>
                             </div>
                         </div>
                         <div class="row">
@@ -34,7 +37,6 @@
                                 
                                 <div class="row my-n1">
                                     <div class="col">
-                                        {# Note: In Bootstrap 5 there is line height class, at some point, we will upgrade to Bootstrap 5. #}
                                         <h5>
                                             Preferences: <input type="text" class="border-0 person-preferences-input" value="No preferences" autocomplete="off" />
                                         </h5>
@@ -74,8 +76,8 @@
                                                 <img 
                                                     alt="LOGO"
                                                     src="{{ asset('img/profile.png') }}"
-                                                    width="50"
-                                                    height="50"
+                                                    width="70"
+                                                    height="70"
                                                 >
                                             </div>
                                         </div>
@@ -101,8 +103,8 @@
                                 <img 
                                     alt="LOGO"
                                     src="{{ asset('img/profile.png') }}"
-                                    width="50"
-                                    height="50"
+                                    width="70"
+                                    height="70"
                                 >
                             </div>
                         </div>
@@ -144,12 +146,14 @@
                 </form>
             </div>
         </div>
+    </section>
+
+    <div class="bg-light">
+        <div class="container">
+            <h3 class="py-2">
+                <i class="fa-solid fa-people-group"></i> Community
+            </h3>
+            {{ include('_include/_community.html.twig') }}
+        </div>
     </div>
-
-    {{ include('_include/_community.html.twig') }}
-    
-{% endblock %}
-
-{% block footer %}
-    {{ include('_include/footer.html.twig') }}
 {% endblock %}

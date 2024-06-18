@@ -3,10 +3,8 @@
  *****************/
  html,
  body {
-     min-width: 350px;
-     min-height: 400px;
-     height: auto;
      background-color: rgba(250, 250, 250, 0.631);
+     min-width: 350px !important;
  }
  
  body.modal-open {
@@ -47,15 +45,7 @@
  label {
      font-size: 14px !important;
  }
- 
- body::-webkit-scrollbar {
-     width: 0px !important;
- }
- 
- *::-webkit-scrollbar {
-     width: 0px;
- }
- 
+
  .backdrop {
      position: fixed;
      top: 0px;
@@ -67,153 +57,22 @@
      z-index: 1002;
  }
  
- .input-required:after {
-     content: '*';
-     color: red;
-     font-size: 12px;
-     margin-left: 2px;
- }
- 
  .dropdown-toggle::after {
      display: none !important;
  }
- 
- a.link-primary {
-     color: #0d6efd !important;
-     text-decoration: underline !important;
-     cursor: pointer !important;
- }
- 
+
  .dropdown-toggle.disabled {
      background-color: rgb(233, 236, 239) !important;
      pointer-events: none !important;
  }
  
- .input-required::after {
-     content: '*';
-     color: red;
-     font-size: 12px;
-     margin-left: 2px;
- }
-
  a.disabled {
      pointer-events: none;
      cursor: default;
  }
- 
- /**********************
-  ****** Spinner *******
-  *********************/
- 
- #loading {
-     position: fixed;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     width: 100%;
-     height: 100%;
-     top: 0;
-     left: 0;
-     opacity: 0.7;
-     background-color: rgba(0, 0, 0, 0.45);
-     z-index: 1019;
- }
- 
- #loading-image {
-     z-index: 1018;
- }
- 
- .border-alert-danger {
-     border-color: #dc3545 !important;
- }
- 
- .border-alert-info {
-     border-color: #bee5eb !important;
- }
- 
- .border-alert-warning {
-     border-color: #ffc107 !important;
- }
- 
- .border-alert-success {
-     border-color: #28a745 !important;
- }
- 
- .border-callout-left {
-     border-left-width: 0.5rem !important;
- }
- 
- .border-alert-primary {
-     border-color: #cce5ff !important;
- }
- 
- .border-callout-left {
-     border-left-width: 0.5rem;
- }
-
- /* Collapse Anchor */
- .collapse-anchor {
-     color: inherit;
-     text-decoration: none;
- }
- 
- .collapse-anchor[aria-expanded=true] .fa-chevron-down {
-     display: none;
- }
- 
- .collapse-anchor[aria-expanded=false] .fa-chevron-up {
-     display: none;
- }
- 
- .collapse-anchor:hover {
-     color: inherit;
-     text-decoration: none;
- }
- 
- /**************************************
- ****** Bootstrap Modal Scrollbar ******
- ***************************************/
- /* Source: https://stackoverflow.com/questions/42115110/how-can-i-change-the-scrollbar-style-in-bootstrap */
- .modal *::-webkit-scrollbar {
-     width: 8px;
-     background-color: #F5F5F5;
- }
- 
- .modal *::-webkit-scrollbar-track {
-     box-shadow: inset 0 0 6px rgba(104, 140, 240, 0.3);
-   }
- 
- .modal *::-webkit-scrollbar-thumb {
-     background-color: lightblue;
-     border-radius: 10px;
- }
- 
- /**************************************
- ****** General UI Style ***************
- ***************************************/
- .clickable {
-     cursor:pointer;
- }
- 
- .terms-conditions-container {
-     white-space: pre-wrap;
- }
-
- nav a, nav span {
-    font-family:'Roboto Condensed', Helvetica, Arial, sans-serif !important;
-    font-size:16px; 
-    font-weight: 480;
-}
-
-.bottom-fixed-button {
-    position: fixed;
-    bottom: 25px;
-    left: calc(50% - 80.235px);
-    z-index: 10;
-}
 
  /**************************************
- ****** Camera CSS ******
+ ****** Camera CSS ********************
  ***************************************/
  #camera {
     width: 100%;
@@ -256,4 +115,20 @@
 
 .stars-radio.checked + label {
     color: gold;
+}
+
+.banner-success {
+    background-color: #defde6 !important;
+}
+
+footer {
+    background-color: #defde6 !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+img {
+    border-radius: 50%;
 }

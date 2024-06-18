@@ -1,21 +1,32 @@
-<nav class="navbar navbar-dark bg-dark navbar-expand-xl sticky-top">
-    <a class="navbar-brand" href="{{ path('basic_info') }}">
-        <img src="{{ asset('img/logo.png') }}" height="35" />
-            &nbsp;&nbsp;
-    </a>
-
-    <a class="navbar-brand" href="{{ path('basic_info') }}">
-        <span class="d-none d-md-inline text-white">LEFTOVER TO RECIPE </span>
-    </a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto"></ul>
-        <a class="nav-link text-white" href="{{ path('basic_info') }}">HOME</a>
-        <a class="nav-link text-white" href="">MY RECIPES</a>
-        <a class="nav-link text-white" href="">LOGOUT</a>
+<header>
+    <div class="collapse bg-dark bg-gradient" id="navbarHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+                <h4 class="text-white">Leftover to Recipe</h4>
+                <p class="text-light">
+                    📢 Turn your leftover ingredients into delectable meals, minimize food waste, and simplify meal decisions with Leftover to Recipe, your ultimate kitchen companion! -- Leftover to Recipe Team
+                </p>
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+                    <h4 class="text-white">Menu</h4>
+                    <ul class="list-unstyled">
+                        <li><a class="text-white" href="{{ path('basic_info') }}">Home</a></li>
+                        <li><a class="text-white" href="">My recipes</a></li>
+                        <li><a class="text-white" href="">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-</nav>
+    <div class="navbar navbar-dark bg-dark bg-gradient shadow-sm">
+        <div class="container">
+        <a href="{{ path('basic_info') }}" class="navbar-brand d-flex align-items-center">
+            <img src="{{ asset('img/logo.png') }}" height="50" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        </div>
+    </div>
+</header>
