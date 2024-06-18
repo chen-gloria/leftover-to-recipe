@@ -37,6 +37,11 @@ $(document).ready(function() {
     });
 
     captureButton.on('click', function () {
+        if (!stream) {
+            console.error('Camera stream not initialized.');
+            return;
+        }
+
         const canvas = document.createElement('canvas');
         canvas.width = video[0].videoWidth;
         canvas.height = video[0].videoHeight;
@@ -69,6 +74,7 @@ function startCamera() {
             stream = mediaStream;
             video[0].srcObject = mediaStream;
             video[0].play();
+            video.show();  // Display the video element after camera access is allowed
         })
         .catch(function (err) {
             console.error('Error accessing camera:', err);
