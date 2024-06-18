@@ -18,6 +18,7 @@ const ingredientsImageBase64Input = $('#ingredients-image-base64');
 
 let stream;
 
+cameraView.append(video);
 startCamera();
 
 $(document).ready(function() { 
@@ -62,12 +63,11 @@ function startCamera() {
     if (isMobile) {
         constraints = { video: { facingMode: 'environment' } };
     }
-
+    
     navigator.mediaDevices.getUserMedia(constraints)
         .then(function (mediaStream) {
             stream = mediaStream;
             video[0].srcObject = mediaStream;
-            cameraView.append(video);
             video[0].play();
         })
         .catch(function (err) {

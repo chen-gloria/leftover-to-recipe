@@ -42,6 +42,14 @@ Our project is designed with a dual purpose: to reduce food waste and help indiv
 
 https://leftover-to-recipe-380643b48bf7.herokuapp.com/
 
+or try to scan
+
+<p align="center">
+  <img src="public/img/qr_code.png" width=250 />
+  <br />
+  <span style="color: grey;"><i>QR Code for live</i></span>
+</p>
+
 ### Demo video 
 
 Use `Command + Click`(in MacOS) or `Ctrl + Click`(in Linux and Windows) to open and watch this video in a new page:
