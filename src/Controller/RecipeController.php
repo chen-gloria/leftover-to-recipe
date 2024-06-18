@@ -31,7 +31,7 @@ class RecipeController extends AbstractController
                 'recipe_summary' => 'A zesty stir-fry dish with tender chicken, fresh basil, and fiery Thai chilies, seasoned with garlic and soy sauce.',
                 'allergies' => 'Contains soy; avoid if allergic.',
                 'preferences' => 'Asian cuisine enthusiasts; spicy food lovers.',
-                'hash_tags' => '#ThaiFlavors, #FieryDelight, #QuickStirFry'
+                'hash_tags' => '#ThaiFlavors, #FieryDelight'
             ],
             [
                 'name' => 'Daniel',
@@ -51,7 +51,7 @@ class RecipeController extends AbstractController
                 'recipe_summary' => 'Warm tortillas filled with spicy black beans, fresh salsa, avocado slices, and tangy lime crema. ',
                 'allergies' => 'Contains gluten (tortillas)',
                 'preferences' => 'Mexican food enthusiasts; vegetarian-friendly option.',
-                'hash_tags' => '#TacoTuesday, #MexicanCuisine, #SpicyBeans'
+                'hash_tags' => '#TacoTuesday, #MexicanCuisine'
             ],
             [
                 'name' => 'Akhil',
@@ -71,7 +71,7 @@ class RecipeController extends AbstractController
                 'recipe_summary' => 'Hearty chickpeas simmered in a creamy coconut curry sauce with onions, tomatoes, and a blend of aromatic spices.',
                 'allergies' => 'Contains coconut.',
                 'preferences' => 'Vegans; lovers of Indian flavors.',
-                'hash_tags' => '#VeganComfort, #CurryLove, #PlantBasedEats'
+                'hash_tags' => '#VeganComfort, #CurryLove'
             ],
             [
                 'name' => 'Jan Z.',
