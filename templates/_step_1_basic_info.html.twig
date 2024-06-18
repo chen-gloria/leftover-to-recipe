@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block javascripts %}
+    {{ parent() }}
     <script type="module" src="{{ asset('js/basic_info.js') }}"></script>
 {% endblock %}
 

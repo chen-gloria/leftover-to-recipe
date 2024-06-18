@@ -3,25 +3,8 @@
 {% block title %}Leftover to recipe{% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     <script type="module" src="{{ asset('js/camera.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() { 
-            // Hide message after 5s or click captureButton
-            setTimeout(function() {
-                $('.alert').alert('close');
-            }, 5000);
-            $('#captureButton').click(function() {
-                $('.alert').alert('close');
-            });
-
-            // Show loading spinner on form submission
-            $('#picture-scanner-form').submit(function() {
-                $('#loading-overlay').removeClass('d-none');
-                $('#commenceIdentifyingIngredientsBtn').prop('disabled', true);
-            });
-        });
-    </script>
 {% endblock %}
 
 {% block body %}
@@ -48,38 +31,53 @@
     </div>
 
     <form 
-        id="picture-scanner-form"
+        id="generate-ingredients-form"
         method="POST"
         action="{{ path('generate_ingeredients') }}"
     >
         <div class="card-body bg-transparent border-0 pt-0">
-            <div class="col-12 col-md-8 container-fluid">
-                <p>
-                    <strong>Preferences:</strong><input class="border-0" type="text" autocomplete="off" name="personPreferences" value="{{ person_preferences is same as "" ? "No preferences" : person_preferences }}" />
-                    <br />
-                    <strong>Allergies:</strong><input class="border-0" type="text" autocomplete="off" name="personAllergies" value="{{ person_allergies is same as "" ? "No allergies" : person_allergies }}" />
-                </p>
+            <div class="row">
+                <div class="col-12 col-md-8 container-fluid">
+                    <p>
+                        <strong>Preferences:</strong><input class="border-0" type="text" autocomplete="off" name="personPreferences" value="{{ person_preferences is same as "" ? "No preferences" : person_preferences }}" />
+                        <br />
+                        <strong>Allergies:</strong><input class="border-0" type="text" autocomplete="off" name="personAllergies" value="{{ person_allergies is same as "" ? "No allergies" : person_allergies }}" />
+                    </p>
+                </div>
             </div>
-            <div id="picture-scanner-container" class="col-12 col-md-8 container-fluid d-flex flex-column justify-content-center align-items-center mb-4 p-2">
-                <div id="camera"></div>
-                <button type="button" class="btn btn-info px-4 mt-4" id="captureButton">Capture</button>
-                <img id="capturedImage" alt="Captured Image">
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <div id="picture-scanner-container">
+                        <div id="camera" class="d-flex justify-content-center"></div>
 
-                <button type="button" class="btn btn-info px-4 mt-4 d-none" id="recaptureBtn">Recapture</button>
-                    <input 
-                        id="ingredients-image-base64"
-                        type="hidden" 
-                        name="ingredients_img_base_64"
-                        value=""
-                    />
+                        <img id="capturedImage" alt="Captured Image">
 
-                    <button type="submit" id="commenceIdentifyingIngredientsBtn" class="btn btn-info px-4 mt-4 d-none">
+                        <!-- Loading spinner -->
+                        <div id="loading-overlay" class="d-none">
+                            <div class="spinner-border text-info" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col d-flex justify-content-center">
+                    <button type="button" class="btn btn-info px-4" id="captureButton">Capture</button>
+                    <button type="button" class="btn btn-info px-4 d-none" id="recaptureBtn">Recapture</button>
+                        <input 
+                            id="ingredients-image-base64"
+                            type="hidden" 
+                            name="ingredients_img_base_64"
+                            value=""
+                        />
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col d-flex justify-content-center">
+                    <button type="submit" id="commenceIdentifyingIngredientsBtn" class="btn btn-info px-4 d-none">
                         Start identifying ingredients
                     </button>
-
-                <!-- Loading spinner -->
-                <div id="loading-overlay" class="d-none">
-                    <div class="spinner-border text-info" role="status"></div>
                 </div>
             </div>
         </div>

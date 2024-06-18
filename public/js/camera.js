@@ -1,20 +1,74 @@
-const video = document.createElement('video');
-const cameraView = document.getElementById('camera');
-const captureButton = document.getElementById('captureButton');
-const capturedImage = document.getElementById('capturedImage');
-const recaptureBtn  = document.getElementById('recaptureBtn');
-const commenceIdentifyingIngredientsBtn = document.getElementById('commenceIdentifyingIngredientsBtn');
-const ingredientsImageBase64Input = document.getElementById('ingredients-image-base64');
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+const video = $('<video>', {
+    width: isMobile ? 320 : 600,
+    height: isMobile ? 240 : 400,
+    'max-width': '100%',
+    'max-height': '100%',
+    autoplay: true
+});
+
+const generateIngredientsForm = $('#generate-ingredients-form');
+const cameraView = $('#camera')
+const captureButton = $('#captureButton');
+const capturedImage = $('#capturedImage');
+const recaptureBtn  = $('#recaptureBtn');
+const commenceIdentifyingIngredientsBtn = $('#commenceIdentifyingIngredientsBtn');
+const ingredientsImageBase64Input = $('#ingredients-image-base64');
 
 let stream;
 
+startCamera();
+
+$(document).ready(function() { 
+    // Hide message after 5s or click captureButton
+    setTimeout(function() {
+        $('.alert').alert('close');
+    }, 5000);
+    $('#captureButton').click(function() {
+        $('.alert').alert('close');
+    });
+
+    // Show loading spinner on form submission
+    generateIngredientsForm.submit(function() {
+        $('#loading-overlay').removeClass('d-none');
+        commenceIdentifyingIngredientsBtn.prop('disabled', true);
+    });
+
+    captureButton.on('click', function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = video[0].videoWidth;
+        canvas.height = video[0].videoHeight;
+        canvas.getContext('2d').drawImage(video[0],0, 0, canvas.width, canvas.height);
+    
+        const imageDataURL = canvas.toDataURL('image/png');
+    
+        capturedImage.attr('src', imageDataURL).show();
+        video.hide();
+        captureButton.hide();
+        stream.getTracks().forEach(track => track.stop());
+        recaptureBtn.removeClass("d-none");
+        commenceIdentifyingIngredientsBtn.removeClass("d-none");
+    
+        // Set the image base 64 to the input
+        ingredientsImageBase64Input.val(imageDataURL);
+    })
+    
+    recaptureBtn.on('click', resetCamera);
+});
+
 function startCamera() {
-    navigator.mediaDevices.getUserMedia({video: { facingMode: { ideal: 'environment' } }})
+    let constraints = { video: true };
+    if (isMobile) {
+        constraints = { video: { facingMode: 'environment' } };
+    }
+
+    navigator.mediaDevices.getUserMedia(constraints)
         .then(function (mediaStream) {
             stream = mediaStream;
-            video.srcObject = mediaStream;
-            cameraView.appendChild(video);
-            video.play();
+            video[0].srcObject = mediaStream;
+            cameraView.append(video);
+            video[0].play();
         })
         .catch(function (err) {
             console.error('Error accessing camera:', err);
@@ -22,31 +76,11 @@ function startCamera() {
 }
 
 function resetCamera() {
-    recaptureBtn.classList.add("d-none");
-    commenceIdentifyingIngredientsBtn.classList.add("d-none");
-    capturedImage.style.display = 'none';
-    video.style.display = 'block';
-    captureButton.style.display = 'block';
-    capturedImage.src = '';
+    recaptureBtn.addClass("d-none");
+    commenceIdentifyingIngredientsBtn.addClass("d-none");
+    capturedImage.hide();
+    video.show();
+    captureButton.show();
+    capturedImage.attr('src', '');
     startCamera();
 }
-
-startCamera();
-
-captureButton.addEventListener('click', function () {
-    const canvas = document.createElement('canvas');
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-    capturedImage.src = canvas.toDataURL('image/png');
-    capturedImage.style.display = 'block';
-    video.style.display = 'none';
-    captureButton.style.display = 'none';
-    stream.getTracks().forEach(track => track.stop());
-    recaptureBtn.classList.remove("d-none");
-    commenceIdentifyingIngredientsBtn.classList.remove("d-none");
-    // Set the image base 64 to the input
-    ingredientsImageBase64Input.value = canvas.toDataURL('image/png');
-});
-
-recaptureBtn.addEventListener('click', resetCamera);
