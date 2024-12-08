@@ -1,3 +1,5 @@
 <?php
 
-return [];
+return [
+    'OPEN_AI_KEY' => null,
+];

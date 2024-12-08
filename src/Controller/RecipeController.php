@@ -85,7 +85,7 @@ class RecipeController extends AbstractController
             ]
         ];
 
-        return $this->render('_step_1_basic_info.html.twig', [
+        return $this->render('steps/_step_1_basic_info.html.twig', [
             'friend_posts' => $friendPosts
         ]);
     }
@@ -96,7 +96,7 @@ class RecipeController extends AbstractController
         $personPreferences = $request->get('personPreferences') ?? "";
         $personAllergies = $request->get('personAllergies') ?? "";
 
-        return $this->render('_step_2_get_camera.html.twig', [
+        return $this->render('steps/_step_2_get_camera.html.twig', [
             'person_preferences' => $personPreferences,
             'person_allergies' => $personAllergies
         ]);
@@ -163,7 +163,7 @@ class RecipeController extends AbstractController
 
         $ingredients = $request->get('ingredients');
 
-        return $this->render('_step_3_get_ingeredients.html.twig', [
+        return $this->render('steps/_step_3_get_ingeredients.html.twig', [
             'ingredients' => $ingredients,
             'person_preferences' => $personPreferences,
             'person_allergies' => $personAllergies
@@ -190,7 +190,6 @@ class RecipeController extends AbstractController
                 'recipes' => json_decode($recipesContent)
             ]);
         } catch (Throwable $e) {
-            
             $this->addFlash('danger', 'We can not generate recipe for now - there is something wrong in the server :(. Please try again or contact us for support.');
             return $this->redirectToRoute('get_camera');
         }
@@ -225,7 +224,7 @@ class RecipeController extends AbstractController
     {
         $recipes = $request->get('recipes');
 
-        return $this->render('_step_4_get_recipes_summmary.html.twig', [
+        return $this->render('steps/_step_4_get_recipes_summmary.html.twig', [
             'recipes' => $recipes
         ]);
     }
@@ -245,7 +244,7 @@ class RecipeController extends AbstractController
 
         $this->addFlash("success", "Congratulations! This recipe has been added to your recipe book.");
         
-        return $this->render('_step_5_recipe_details.html.twig', [
+        return $this->render('steps/_step_5_recipe_details.html.twig', [
             'recipe' => $recipe
         ]);
     }

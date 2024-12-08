@@ -1,0 +1,12 @@
+#camera {
+    max-width: 350px;
+}
+
+#capturedImage {
+    display: none;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+}
