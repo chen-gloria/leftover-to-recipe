@@ -1,90 +1,38 @@
-/*****************
- ****** Body ******
- *****************/
- html,
- body {
-     background-color: rgba(250, 250, 250, 0.631);
-     min-width: 350px !important;
- }
- 
- body.modal-open {
-     overflow: hidden;
- }
- 
- h1 {
-     font-size: 32px !important;
- }
- 
- h2 {
-     font-size: 28px !important;
-     color: #6c757d !important /* text-muted class in Bootstrap */
- }
- 
- h3 {
-     font-size: 24px !important;
- }
- 
- h4 {
-     font-size: 20px !important;
- }
- 
- a.link-primary {
-     color: #0d6efd !important;
-     text-decoration: underline !important;
-     cursor: pointer !important;
- }
- 
- h6 {
-     font-size: 14px !important;
- }
- 
- input {
-     font-size: 14px !important;
- }
- 
- label {
-     font-size: 14px !important;
- }
-
- .backdrop {
-     position: fixed;
-     top: 0px;
-     right: 0px;
-     bottom: 0px;
-     left: 0px;
-     background: rgba(0, 0, 0, 0.3);
-     /* This z-indx has to be higher than Leaflet but lower than the top navbar */
-     z-index: 1002;
- }
- 
- .dropdown-toggle::after {
-     display: none !important;
- }
-
- .dropdown-toggle.disabled {
-     background-color: rgb(233, 236, 239) !important;
-     pointer-events: none !important;
- }
- 
- a.disabled {
-     pointer-events: none;
-     cursor: default;
- }
-
- /**************************************
- ****** Camera CSS ********************
- ***************************************/
- #camera {
-    max-width: 350px;
+/*******************************
+ ****** System font size *******
+ *******************************/
+body {
+    background-color: rgba(250, 250, 250, 0.631);
+    min-width: 350px !important;
 }
 
-#capturedImage {
-    display: none;
-    max-width: 100%;
-    height: auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 20px;
+h1 {
+    font-size: 32px !important;
+}
+
+h2 {
+    font-size: 28px !important;
+    color: #6c757d !important /* text-muted class in Bootstrap */
+}
+
+h3 {
+    font-size: 24px !important;
+}
+
+h4 {
+    font-size: 20px !important;
+}
+ 
+h6 {
+    font-size: 14px !important;
+}
+
+input {
+    font-size: 14px !important;
+}
+
+label {
+    font-size: 14px !important;
 }
 
 .selected {
@@ -119,10 +67,6 @@
 
 footer {
     background-color: #defde6 !important;
-}
-
-a {
-    text-decoration: none !important;
 }
 
 img {
