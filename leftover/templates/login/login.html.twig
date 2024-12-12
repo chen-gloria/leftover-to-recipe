@@ -2,69 +2,45 @@
 
 {% block title %}Leftover to Recipe - Login Page{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        body {
-            background-color: #f9f9f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-        }
-        .login-header {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-    </style>
-{% endblock %}
-
 {% block head_navbar %}{% endblock %}
 
+{% block body_class %}"d-flex align-items-center"{% endblock %}
+
 {% block body %}
-    <div class="login-box">
-        <div class="login-header">
-            Hello There!
-        </div>
+    <div class="form-signin w-100 m-auto shadow login-box">
         <form>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            {# <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> #}
+            <h1 class="login-header">Hello There!</h1>
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter your password">
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
             </div>
-            <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="rememberMe">
-                <label class="form-check-label" for="rememberMe">Remember Me</label>
+
+            <div class="form-check text-start mb-3">
+                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Remember me
+                </label>
             </div>
-            <button type="submit" class="btn btn-primary w-100">
-                Login
-            </button>
+            <button class="btn btn-primary w-100 py-2" type="submit">Log in</button>
             <div class="text-center my-3">
                 <a href="#" class="text-decoration-none">Recovery Password</a>
             </div>
             <button type="button" class="btn btn-outline-secondary w-100">
                 Sign in with Google
             </button>
-        </form>
-        <div class="text-center mt-3">
+
+            <div class="text-center mt-3">
             <p>
                 Don't have an account yet? <a href="#" class="text-decoration-none">Sign Up</a>
             </p>
         </div>
+        </form>
     </div>
 {% endblock %}
 

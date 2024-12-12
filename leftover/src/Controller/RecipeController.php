@@ -18,7 +18,7 @@ class RecipeController extends AbstractController
     )
     {}
 
-    #[Route('/', name: 'basic_info', methods: ['GET'])]
+    #[Route('/info', name: 'basic_info', methods: ['GET'])]
     public function home(): Response
     {
         // Dummy data

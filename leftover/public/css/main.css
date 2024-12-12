@@ -1,9 +1,15 @@
 /*******************************
  ****** System font size *******
  *******************************/
+
+html {
+    height: 100%;
+}
+
 body {
-    background-color: rgba(250, 250, 250, 0.631);
-    min-width: 350px !important;
+    background-color: #f9f9f9;
+    min-width: 330px;
+    height: 100%;
 }
 
 h1 {
@@ -12,7 +18,7 @@ h1 {
 
 h2 {
     font-size: 28px !important;
-    color: #6c757d !important /* text-muted class in Bootstrap */
+    color: #6c757d !important/* text-muted class in Bootstrap */
 }
 
 h3 {
@@ -22,7 +28,7 @@ h3 {
 h4 {
     font-size: 20px !important;
 }
- 
+
 h6 {
     font-size: 14px !important;
 }
@@ -35,8 +41,28 @@ label {
     font-size: 14px !important;
 }
 
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.login-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.login-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+}
+
 .selected {
-    box-shadow: 0 0 10px 0 rgba(39, 153, 245, 0.8) !important; /* Blue shadow effect */
+    box-shadow: 0 0 10px 0 rgba(39, 153, 245, 0.8) !important;
+    /* Blue shadow effect */
 }
 
 .stars {
@@ -57,7 +83,7 @@ label {
     content: '★';
 }
 
-.stars-radio.checked + label {
+.stars-radio.checked+label {
     color: gold;
 }
 

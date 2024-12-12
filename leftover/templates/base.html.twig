@@ -15,7 +15,7 @@
         {% endblock %}
     </head>
 
-    <body>
+    <body class={% block body_class %}""{% endblock %}>
         {% block head_navbar %}
             {{ include('_include/head_navbar.html.twig') }}
         {% endblock %}

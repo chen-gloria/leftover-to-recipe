@@ -11,7 +11,7 @@ use Throwable;
 
 class LoginController extends AbstractController
 {
-    #[Route('/login', name: 'login', methods: ['GET'])]
+    #[Route('/', name: 'login', methods: ['GET'])]
     public function login(): Response
     {
         return $this->render('login/login.html.twig', [
