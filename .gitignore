@@ -1,20 +1,14 @@
-###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
-/var/
-/vendor/
-###< symfony/framework-bundle ###
+leftover/vendor
+leftover/var
+leftover/.env
+leftover/.env.test
+leftover/.env.local
+leftover/.env.local.php
+leftover/.env.*.local
+leftover/config/secrets/prod/prod.decrypt.private.php
+leftover/public/bundles/
+leftover/phpunit.xml.dist
 
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###
-
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
-public/img/test.jpeg
+# No sharing files
+leftover/.env
+no-sharing-testing-files/

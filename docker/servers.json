@@ -1,0 +1,13 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "Leftover Dev",
+            "Group": "leftover",
+            "Port": 5432,
+            "Username": "admin",
+            "Host": "postgresql",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "leftover"
+        }
+    }
+}
