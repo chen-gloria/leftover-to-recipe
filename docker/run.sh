@@ -7,7 +7,6 @@ else
     cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 fi
 
-/usr/bin/wait-for-it -h $DATABASE_SERVER -p $DATABASE_SERVER_PORT -t 0
 php bin/console secrets:decrypt-to-local
 COMPOSER_ALLOW_SUPERUSER=1 composer dump-env $APP_ENV
 
@@ -17,9 +16,7 @@ COMPOSER_ALLOW_SUPERUSER=1 composer dump-env $APP_ENV
 
 # php bin/console doctrine:migrations:migrate --no-interaction
 
-if [[ "$APP_ENV" == "dev" ]] ; then
-    php bin/console doctrine:fixtures:load --no-interaction
-fi
+php bin/console doctrine:fixtures:load --no-interaction
 
 # Ensure the cache directory is clean and writable to the webserver user
 php bin/console cache:clear
