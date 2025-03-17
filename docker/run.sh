@@ -17,9 +17,9 @@ COMPOSER_ALLOW_SUPERUSER=1 composer dump-env $APP_ENV
 
 # php bin/console doctrine:migrations:migrate --no-interaction
 
-# if [[ "$APP_ENV" == "dev" ]] ; then
-#     php bin/console doctrine:fixtures:load --no-interaction
-# fi
+if [[ "$APP_ENV" == "dev" ]] ; then
+    php bin/console doctrine:fixtures:load --no-interaction
+fi
 
 # Ensure the cache directory is clean and writable to the webserver user
 php bin/console cache:clear
