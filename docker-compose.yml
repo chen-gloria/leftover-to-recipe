@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - APP_ENV=prod
+      - APP_ENV=dev
     volumes:
       - ./leftover:/var/www/leftover:rw
     networks:

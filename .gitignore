@@ -3,6 +3,7 @@ leftover/var
 leftover/.env
 leftover/.env.test
 leftover/.env.local
+leftover/.env.dev
 leftover/.env.local.php
 leftover/.env.*.local
 leftover/config/secrets/prod/prod.decrypt.private.php

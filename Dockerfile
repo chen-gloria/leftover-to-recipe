@@ -22,4 +22,5 @@ RUN \
     chmod 700 /usr/local/bin/run.sh
 
 WORKDIR /var/www/${APPNAME}
+
 CMD /usr/local/bin/run.sh
