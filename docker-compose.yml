@@ -6,7 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - APP_ENV=prod
+      - APP_ENV=dev
+      - BASE_URL=http://localhost/leftover
     volumes:
       - ./leftover:/var/www/leftover:rw
     networks:
@@ -37,3 +38,6 @@ services:
 
 networks:
   znet:
+
+volumes:
+  postgres-data:
