@@ -1,30 +1,4 @@
 {
-    "doctrine/doctrine-bundle": {
-        "version": "2.13",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "2.10",
-            "ref": "c170ded8fc587d6bd670550c43dafcf093762245"
-        },
-        "files": [
-            "config/packages/doctrine.yaml",
-            "src/Entity/.gitignore",
-            "src/Repository/.gitignore"
-        ]
-    },
-    "doctrine/doctrine-fixtures-bundle": {
-        "version": "4.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "3.0",
-            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
-        },
-        "files": [
-            "src/DataFixtures/AppFixtures.php"
-        ]
-    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
@@ -104,18 +78,6 @@
             "src/Kernel.php"
         ]
     },
-    "symfony/mailer": {
-        "version": "6.4",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "4.3",
-            "ref": "09051cfde49476e3c12cd3a0e44289ace1c75a4f"
-        },
-        "files": [
-            "config/packages/mailer.yaml"
-        ]
-    },
     "symfony/maker-bundle": {
         "version": "1.62",
         "recipe": {
@@ -124,18 +86,6 @@
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
-    },
-    "symfony/messenger": {
-        "version": "6.4",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "6.0",
-            "ref": "ba1ac4e919baba5644d31b57a3284d6ba12d52ee"
-        },
-        "files": [
-            "config/packages/messenger.yaml"
-        ]
     },
     "symfony/monolog-bundle": {
         "version": "3.10",
@@ -202,33 +152,6 @@
             "config/routes/security.yaml"
         ]
     },
-    "symfony/stimulus-bundle": {
-        "version": "2.23",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "2.13",
-            "ref": "6acd9ff4f7fd5626d2962109bd4ebab351d43c43"
-        },
-        "files": [
-            "assets/bootstrap.js",
-            "assets/controllers.json",
-            "assets/controllers/hello_controller.js"
-        ]
-    },
-    "symfony/translation": {
-        "version": "6.4",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "6.3",
-            "ref": "e28e27f53663cc34f0be2837aba18e3a1bef8e7b"
-        },
-        "files": [
-            "config/packages/translation.yaml",
-            "translations/.gitignore"
-        ]
-    },
     "symfony/twig-bundle": {
         "version": "6.4",
         "recipe": {
@@ -241,42 +164,5 @@
             "config/packages/twig.yaml",
             "templates/base.html.twig"
         ]
-    },
-    "symfony/ux-turbo": {
-        "version": "2.23",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "2.19",
-            "ref": "9dd2778a116b6e5e01e5e1582d03d5a9e82630de"
-        }
-    },
-    "symfony/validator": {
-        "version": "6.4",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "5.3",
-            "ref": "c32cfd98f714894c4f128bb99aa2530c1227603c"
-        },
-        "files": [
-            "config/packages/validator.yaml"
-        ]
-    },
-    "symfony/web-profiler-bundle": {
-        "version": "6.4",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "6.1",
-            "ref": "8b51135b84f4266e3b4c8a6dc23c9d1e32e543b7"
-        },
-        "files": [
-            "config/packages/web_profiler.yaml",
-            "config/routes/web_profiler.yaml"
-        ]
-    },
-    "twig/extra-bundle": {
-        "version": "v3.20.0"
     }
 }
