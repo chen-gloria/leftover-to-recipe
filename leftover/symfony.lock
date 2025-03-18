@@ -9,8 +9,7 @@
         },
         "files": [
             ".env.test",
-            "phpunit.xml.dist",
-            "tests/bootstrap.php"
+            "phpunit.xml.dist"
         ]
     },
     "symfony/apache-pack": {
@@ -110,8 +109,7 @@
         "files": [
             ".env.test",
             "bin/phpunit",
-            "phpunit.xml.dist",
-            "tests/bootstrap.php"
+            "phpunit.xml.dist"
         ]
     },
     "symfony/routing": {
