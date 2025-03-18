@@ -1,6 +1,5 @@
 leftover/vendor
 leftover/var
-leftover/.env
 leftover/.env.test
 leftover/.env.local
 leftover/.env.dev
@@ -11,5 +10,4 @@ leftover/public/bundles/
 leftover/phpunit.xml.dist
 
 # No sharing files
-leftover/.env
 no-sharing-testing-files/
