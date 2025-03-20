@@ -5,7 +5,7 @@ ENV APPNAME=leftover
 RUN \
     apt-get update && \
     apt-get autoremove -y && \
-    apt-get install unzip wait-for-it libicu-dev libpq-dev zlib1g-dev -y && \
+    apt-get install unzip wait-for-it libicu-dev libpq-dev zlib1g-dev libapache2-mod-fcgid -y && \
     docker-php-ext-install intl pdo_pgsql pcntl sockets && \
     echo 'extension=intl.so' > /usr/local/etc/php/conf.d/docker-php-ext-intl.ini && \
     rm -rf /var/lib/apt/lists/*
