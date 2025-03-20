@@ -11,15 +11,12 @@ services:
       - ./leftover:/var/www/leftover:rw
     networks:
       - znet
-    expose:
-      - "9000"
 
   apache-leftover:
     container_name: apache-leftover
     hostname: apache-leftover
     image: httpd:2.4
     depends_on:
-      - leftover
       - apache-frontproxy
     volumes:
       - ./docker/apache-leftover/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
