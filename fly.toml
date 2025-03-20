@@ -10,6 +10,7 @@ primary_region = 'syd'
 
 [http_service]
   internal_port = 80
+  protocol = "tcp"
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
