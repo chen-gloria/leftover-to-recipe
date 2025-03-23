@@ -1,26 +1,34 @@
-FROM php:8.3-fpm
-ENV APPNAME=leftover
+# Use an official PHP image with Apache
+FROM php:8.3-apache
 
-# Basic PHP environment
-RUN \
-    apt-get update && \
-    apt-get autoremove -y && \
-    apt-get install unzip wait-for-it libicu-dev libpq-dev zlib1g-dev libapache2-mod-fcgid fcgiwrap -y && \
-    docker-php-ext-install intl pdo_pgsql pcntl sockets && \
-    echo 'extension=intl.so' > /usr/local/etc/php/conf.d/docker-php-ext-intl.ini && \
-    rm -rf /var/lib/apt/lists/*
+# Install required system dependencies
+RUN apt-get update && apt-get install -y \
+    unzip \
+    libicu-dev \
+    libpq-dev \
+    && docker-php-ext-install intl opcache pdo pdo_mysql
 
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+# Enable Apache mod_rewrite for Symfony routing
+RUN a2enmod rewrite
 
-COPY ${APPNAME}/ /var/www/${APPNAME}/
+# Set the working directory inside the container
+WORKDIR /var/www/html
 
-RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --working-dir=/var/www/${APPNAME}/
+# Copy the Symfony app from the 'leftover' folder
+COPY leftover/ /var/www/html/
 
-COPY docker/run.sh /usr/local/bin/run.sh
+# Set correct permissions
+RUN chown -R www-data:www-data /var/www/html/var /var/www/html/public
 
-RUN \
-    chmod 700 /usr/local/bin/run.sh
+# Ensure Apache serves from Symfony's `public/` directory
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-WORKDIR /var/www/${APPNAME}
+# Update Apache to listen on port 8080
+RUN sed -i 's/Listen 80/Listen 8080/' /etc/apache2/ports.conf && \
+    sed -i 's/:80>/:8080>/' /etc/apache2/sites-available/000-default.conf
+    
+# Expose the port that Fly.io will use
+EXPOSE 8080
 
-CMD /usr/local/bin/run.sh
+# Set the default Apache command
+CMD ["apache2-foreground"]
