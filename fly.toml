@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for leftover-to-recipe-spring-violet-5364 on 2025-03-23T20:09:42+11:00
+# fly.toml app configuration file generated for leftover-to-recipe on 2025-03-23T20:09:42+11:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'leftover-to-recipe-spring-violet-5364'
+app = 'leftover-to-recipe'
 primary_region = 'syd'
 
 [build]
