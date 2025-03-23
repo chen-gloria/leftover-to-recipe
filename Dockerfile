@@ -17,6 +17,15 @@ WORKDIR /var/www/html
 # Copy the Symfony app from the 'leftover' folder
 COPY leftover/ /var/www/html/
 
+# Install Composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+# Run Composer install (to get vendor/)
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader
+
+# Create necessary directories
+RUN mkdir -p /var/www/html/var /var/www/html/public
+
 # Set correct permissions
 RUN chown -R www-data:www-data /var/www/html/var /var/www/html/public
 
