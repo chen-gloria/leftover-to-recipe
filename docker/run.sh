@@ -14,8 +14,4 @@ COMPOSER_ALLOW_SUPERUSER=1 composer dump-env $APP_ENV
 php bin/console cache:clear
 chown -R www-data var
 
-if [[ "$APP_ENV" == "dev" ]] ; then
-    exec php-fpm
-else
-    exec symfony server:start --no-tls --port=8080
-fi
+exec php-fpm
