@@ -1,16 +1,15 @@
-# fly.toml app configuration file generated for leftover-to-recipe on 2025-03-18T20:56:14Z
+# fly.toml app configuration file generated for leftover-to-recipe-spring-violet-5364 on 2025-03-23T20:09:42+11:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'leftover-to-recipe'
+app = 'leftover-to-recipe-spring-violet-5364'
 primary_region = 'syd'
 
 [build]
 
 [http_service]
-  internal_port = 80
-  protocol = "tcp"
+  internal_port = 8080
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
@@ -21,4 +20,3 @@ primary_region = 'syd'
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 1024
