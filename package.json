@@ -1,0 +1,10 @@
+{
+  "name": "leftover-to-recipe",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Serverless API functions (used by Vercel for the /api endpoints). See web/ for the React frontend.",
+  "dependencies": {
+    "@upstash/redis": "^1.38.2"
+  }
+}

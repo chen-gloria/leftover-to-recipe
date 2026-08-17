@@ -1,13 +1,12 @@
-leftover/vendor
-leftover/var
-leftover/.env.test
-leftover/.env.local
-leftover/.env.dev
-leftover/.env.local.php
-leftover/.env.*.local
-leftover/config/secrets/prod/prod.decrypt.private.php
-leftover/public/bundles/
-leftover/phpunit.xml.dist
-
 # No sharing files
 no-sharing-testing-files/
+
+# Node / Vite / Vercel
+node_modules/
+web/dist/
+.vercel/
+.env
+.env.local
+*.log
+.DS_Store
+.vercel

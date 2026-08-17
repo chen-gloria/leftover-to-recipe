@@ -1,0 +1,28 @@
+.capture-frame {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #1f2a24;
+  box-shadow: var(--shadow-md);
+  margin: 0 auto;
+}
+
+.capture-frame video,
+.capture-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.capture-frame .frame-hint {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-lg);
+  margin: 14px;
+  pointer-events: none;
+}

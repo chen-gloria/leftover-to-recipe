@@ -17,7 +17,7 @@
 **According to [United Nations News](https://news.un.org/en/story/2024/03/1148036#:~:text=UNEP%20report%20reveals.-,With%20783%20million%20people%20going%20hungry%2C%20a%20fifth,all%20food%20goes%20to%20waste&text=While%20a%20third%20of%20humanity,of%20food%20is%20thrown%20away.), with 783 million people going hungry globally, an equivalent of one billion meals are wasted every day. According to the [UN Environment Programme’s Food Waste Index Report 2024](https://wedocs.unep.org/handle/20.500.11822/45230), 1.05 billion tonnes of food are wasted annually. This waste occurs across retail, food service, and household. Most of the world’s food waste comes from households, totalling 631 million tonnes.**
 
 <p align="center">
-  <img src="public/img/globalFoodwasteStats.png" width=550 />
+  <img src="docs/img/globalFoodwasteStats.png" width=550 />
   <br />
   <span style="color: grey;"><i>Source: Food Waste Index Report 2024, UN Environment Programme, 
   <a href="https://wedocs.unep.org/handle/20.500.11822/45230">https://wedocs.unep.org/handle/20.500.11822/45230</a></i>
@@ -33,28 +33,24 @@ Our project is designed with a dual purpose: to reduce food waste and help indiv
 
 ### Logo
 <p align="center">
-  <img src="public/img/logo.png" width=250 />
+  <img src="docs/img/logo.png" width=250 />
   <br />
   <span style="color: grey;"><i>Our Logo</i></span>
 </p>
 
-### Deployment to heroku
+### Live demo
 
-https://leftover-to-recipe-380643b48bf7.herokuapp.com/
+🔗 **[leftover-to-recipe.vercel.app](https://leftover-to-recipe.vercel.app)** *(update this link once deployed — see the "Deploy" section below)*
 
-or try to scan
+The public demo is a fully working instance, capped at **5 AI calls per IP per day** per step (photo → ingredients, ingredients → recipes) to keep API costs bounded. Once the daily limit is hit, the app shows a friendly "demo limit reached, try again tomorrow" message instead of erroring.
 
-<p align="center">
-  <img src="public/img/qr_code.png" width=250 />
-  <br />
-  <span style="color: grey;"><i>QR Code for live</i></span>
-</p>
+> The project's original Heroku deployment (from the 2024 hackathon) and the QR code that pointed to it are retired — the app has since moved from PHP/Symfony on Heroku/Fly.io to this React + Vercel stack.
 
-### Demo video 
+### Demo video
 
-Use `Command + Click`(in MacOS) or `Ctrl + Click`(in Linux and Windows) to open and watch this video in a new page:
+Use `Command + Click`(in MacOS) or `Ctrl + Click`(in Linux and Windows) to open and watch this video in a new page. *(Recorded against the original PHP/Symfony version — the UI has stayed the same, only the stack underneath changed.)*
 
-[![Watch the demo](/public/img/videoSnap.png)](https://www.loom.com/share/2de3bbc5607249a69c222a95f3721988?sid=86a9a667-85fe-412f-ab26-2463c5b45285 "Demo video")
+[![Watch the demo](docs/img/videoSnap.png)](https://www.loom.com/share/2de3bbc5607249a69c222a95f3721988?sid=86a9a667-85fe-412f-ab26-2463c5b45285 "Demo video")
 
 ## 🌎 How does this make the world better?
 - **1. Environmental Impact:**
@@ -112,87 +108,45 @@ By addressing the critical issue of food waste and promoting efficient food mana
 
 ### 1. What is in the stack?
 
-We use [Symfony](https://symfony.com/), a PHP framework using for website app development for front end and back end development.
+- **Frontend**: [React](https://react.dev/) + [Vite](https://vitejs.dev/), styled with Bootstrap 5 (same UI as the original build).
+- **Backend**: two [Vercel serverless functions](https://vercel.com/docs/functions) (`/api/ingredients`, `/api/recipes`) that proxy the OpenAI API — this keeps the API key server-side and is where the daily rate limit is enforced.
+- **Rate limiting**: [Upstash Redis](https://vercel.com/marketplace/upstash) (via Vercel Marketplace), 5 calls per IP per day per endpoint.
+- **Hosting**: [Vercel](https://vercel.com/).
+
+> The app previously ran on Symfony (PHP) — see git history before this rewrite if you need to reference that version.
 
 ### 2. How to run this app in your local?
 
-First of all, you do need a [OpenAI Key](https://platform.openai.com/) 🔒 to utilise the API.
-👉 [How to apply for a OpenAI Key?](https://www.maisieai.com/help/how-to-get-an-openai-api-key-for-chatgpt)
+First of all, you need an [OpenAI API key](https://platform.openai.com/) 🔒.
+👉 [How to apply for an OpenAI API key?](https://www.maisieai.com/help/how-to-get-an-openai-api-key-for-chatgpt)
 
-Secondly, run this app up:
+Steps:
 
-Here are the steps to follow:
-
-- Step 1: [Install PHP 8.2](https://php.watch/articles/install-php82-ubuntu-debian)
-- Step 2: [Install Composer](https://getcomposer.org/download/), which is used to install PHP packages.
-- Step 3: [Install Symfony CLI](https://symfony.com/download)
+- Step 1: Install [Node.js](https://nodejs.org/) 18+ and the [Vercel CLI](https://vercel.com/docs/cli): `npm i -g vercel`
+- Step 2: Install dependencies
 ```bash
-// macOS
-wget https://get.symfony.com/cli/installer -O - | bash
-
-// Linux
-wget https://get.symfony.com/cli/installer -O - | bash
-
-// Windows
-scoop install symfony-cli
+npm install          # installs the /api function dependencies (@vercel/kv)
+cd web && npm install # installs the React app dependencies
+cd ..
 ```
-
-- Step 4: Run `composer install`
+- Step 3: Set your OpenAI key locally (**⚠️ never commit this — `.env`/`.env.local` are already gitignored**). Use plain `.env` — for this no-framework project, `vercel dev` only auto-loads that one, not `.env.local`.
 ```bash
-composer install
+echo "OPENAI_API_KEY=sk-..." > .env
+```
+- Step 4: Run the app with `vercel dev`, which serves the React app *and* the `/api` functions together on one port (rate-limiting falls back to an in-memory counter locally when no Redis store is linked, which is fine for local testing)
+```bash
+vercel dev
 
 # Result
-
-Installing dependencies from lock file (including require-dev)
-Verifying lock file contents can be installed on current platform.
-
-# .... 
-
-Generating autoload files
-114 packages you are using are looking for funding.
-Use the `composer fund` command to find out more!
-
-Run composer recipes at any time to see the status of your Symfony recipes.
-
-# [OK] means the packages have been installed
-
-Executing script cache:clear [OK]
-Executing script assets:install public [OK]
-Executing script importmap:install [OK]
+> Ready! Available at http://localhost:3000
 ```
+- Step 5: Visit `http://localhost:3000` to see the project
 
-- Step 5: Before you start the server, set up your OpenAI Key in your local (**⚠️ but be careful, do not push it to Github or create any pull request with it accidentally, keep it secret with you!**)
+### 3. Deploy
 
-```bash
-php bin/console secrets:set OPEN_AI_KEY
-
- Please type the secret value:
- > 
-
- [OK] Secret "OPEN_AI_KEY" encrypted in "config/secrets/dev/"; you can commit it.
-
-#  To view the secrets that you just set
-php bin/console secrets:list --reveal
-
-------------- ------------------------------------------------------------ ------------- 
-  Secret        Value                                                        Local Value  
- ------------- ------------------------------------------------------------ ------------- 
-  OPEN_AI_KEY   "your-key"                
- ------------- ------------------------------------------------------------ ------------- 
-
-```
-
-- Step 6: Start the Symfony server
-```bash
-symfony server:start
-
-# Result
-
- [OK] Web server listening                                                                                              
-      The Web server is using PHP FPM 8.3.6                                                                             
-      http://127.0.0.1:8000   
-```
-
-- Step 7: Visit `http://127.0.0.1:8000` or `http://localhost:8000/` to see the project
+1. Import this repo into a new [Vercel](https://vercel.com/new) project (it auto-detects `vercel.json`).
+2. Project → **Storage** (or **Integrations → Marketplace**) → add an **Upstash Redis** database → connect it to the project (this injects the `KV_REST_API_URL`/`KV_REST_API_TOKEN` or `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` env vars the rate limiter needs).
+3. Project → **Settings → Environment Variables** → add `OPENAI_API_KEY`.
+4. Deploy — Vercel gives you a live `*.vercel.app` URL.
 
 
