@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Serverless API functions (used by Vercel for the /api endpoints). See web/ for the React frontend.",
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
     "@upstash/redis": "^1.38.2"
   }
 }

@@ -9,6 +9,7 @@ import Camera from './steps/Camera.jsx';
 import Ingredients from './steps/Ingredients.jsx';
 import RecipeList from './steps/RecipeList.jsx';
 import RecipeDetail from './steps/RecipeDetail.jsx';
+import MyRecipes from './steps/MyRecipes.jsx';
 import { fetchIngredients, fetchRecipes } from './api.js';
 
 const STEP = {
@@ -17,7 +18,8 @@ const STEP = {
   CAMERA: 'camera',
   INGREDIENTS: 'ingredients',
   RECIPES: 'recipes',
-  RECIPE_DETAIL: 'recipe_detail'
+  RECIPE_DETAIL: 'recipe_detail',
+  MY_RECIPES: 'my_recipes'
 };
 
 // Maps app steps to the 4-dot progress indicator shown above each screen.
@@ -101,16 +103,22 @@ export default function App() {
       ingredients: recipe.Ingredients,
       instructions: recipe.Instructions
     });
-    setSuccessMessage('Congratulations! This recipe has been added to your recipe book.');
+    setSuccessMessage('Here’s your recipe! Hit "Save" to keep it in your recipe book.');
+    setStep(STEP.RECIPE_DETAIL);
+  }
+
+  function handleViewSavedRecipe(recipe) {
+    setSelectedRecipe(recipe);
+    setSuccessMessage('');
     setStep(STEP.RECIPE_DETAIL);
   }
 
   return (
     <div className="app-shell">
-      <Navbar onNavigateHome={goHome} />
+      <Navbar onNavigateHome={goHome} onNavigateRecipeBook={() => setStep(STEP.MY_RECIPES)} />
 
       <div className="page-container app-main" style={{ paddingBottom: 'var(--space-8)' }}>
-        {step !== STEP.HOME && <StepIndicator current={STEP_INDEX[step]} />}
+        {step in STEP_INDEX && <StepIndicator current={STEP_INDEX[step]} />}
 
         {step !== STEP.CAMERA && step !== STEP.INGREDIENTS && (
           <>
@@ -171,6 +179,8 @@ export default function App() {
         {step === STEP.RECIPE_DETAIL && selectedRecipe && (
           <RecipeDetail recipe={selectedRecipe} onGenerateNew={() => setStep(STEP.CAMERA)} onBackHome={goHome} />
         )}
+
+        {step === STEP.MY_RECIPES && <MyRecipes onBack={goHome} onView={handleViewSavedRecipe} />}
       </div>
 
       <Footer />

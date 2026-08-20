@@ -109,8 +109,10 @@ By addressing the critical issue of food waste and promoting efficient food mana
 ### 1. What is in the stack?
 
 - **Frontend**: [React](https://react.dev/) + [Vite](https://vitejs.dev/), styled with Bootstrap 5 (same UI as the original build).
-- **Backend**: two [Vercel serverless functions](https://vercel.com/docs/functions) (`/api/ingredients`, `/api/recipes`) that proxy the OpenAI API — this keeps the API key server-side and is where the daily rate limit is enforced.
+- **Backend**: [Vercel serverless functions](https://vercel.com/docs/functions) under `/api` — `/api/ingredients` and `/api/recipes` proxy the OpenAI API (keeps the key server-side, enforces the daily rate limit); `/api/auth/*` and `/api/recipe-book` handle login and each visitor's saved recipes.
 - **Rate limiting**: [Upstash Redis](https://vercel.com/marketplace/upstash) (via Vercel Marketplace), 5 calls per IP per day per endpoint.
+- **Database**: [Neon](https://neon.tech) (serverless Postgres) via `@neondatabase/serverless`, storing user accounts and saved recipes. Falls back to an in-process store when `DATABASE_URL` isn't set — fine for a quick UI check, but not reliable across requests (each serverless invocation gets a fresh process), so login/save only actually persists once a real Neon database is connected.
+- **Auth**: a minimal email-only login (no password, no verification email) — a signed, `httpOnly` cookie identifies the visitor. Good enough for gating a personal recipe book; not a substitute for real auth if the app ever handles sensitive data.
 - **Hosting**: [Vercel](https://vercel.com/).
 
 > The app previously ran on Symfony (PHP) — see git history before this rewrite if you need to reference that version.
@@ -129,10 +131,15 @@ npm install          # installs the /api function dependencies (@vercel/kv)
 cd web && npm install # installs the React app dependencies
 cd ..
 ```
-- Step 3: Set your OpenAI key locally (**⚠️ never commit this — `.env`/`.env.local` are already gitignored**). Use plain `.env` — for this no-framework project, `vercel dev` only auto-loads that one, not `.env.local`.
+- Step 3: Set your env vars locally (**⚠️ never commit these — `.env`/`.env.local` are already gitignored**). Use plain `.env` — for this no-framework project, `vercel dev` only auto-loads that one, not `.env.local`.
 ```bash
-echo "OPENAI_API_KEY=sk-..." > .env
+cat >> .env <<'EOF'
+OPENAI_API_KEY=sk-...
+SESSION_SECRET=some-long-random-string
+DATABASE_URL=postgresql://...   # from Neon console -> Connection Details -> Pooled connection
+EOF
 ```
+  `DATABASE_URL` is optional locally (login/save fall back to an in-memory store without it — see the Database note above), but `SESSION_SECRET` should still be set, and both are **required** in production. Optionally add `VITE_PLAY_STORE_URL` (the Play Store listing, once it exists) and `VITE_SITE_URL` (the deployed site URL, used in share captions) to `web/.env` — these are Vite-side, so they live under `web/`, not the repo root.
 - Step 4: Run the app with `vercel dev`, which serves the React app *and* the `/api` functions together on one port (rate-limiting falls back to an in-memory counter locally when no Redis store is linked, which is fine for local testing)
 ```bash
 vercel dev
@@ -146,7 +153,8 @@ vercel dev
 
 1. Import this repo into a new [Vercel](https://vercel.com/new) project (it auto-detects `vercel.json`).
 2. Project → **Storage** (or **Integrations → Marketplace**) → add an **Upstash Redis** database → connect it to the project (this injects the `KV_REST_API_URL`/`KV_REST_API_TOKEN` or `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` env vars the rate limiter needs).
-3. Project → **Settings → Environment Variables** → add `OPENAI_API_KEY`.
-4. Deploy — Vercel gives you a live `*.vercel.app` URL.
+3. Project → **Storage** → add a **Neon** database (or connect an existing Neon project) → this injects `DATABASE_URL`.
+4. Project → **Settings → Environment Variables** → add `OPENAI_API_KEY` and `SESSION_SECRET` (a long random string — e.g. `openssl rand -hex 32`). Optionally add `VITE_PLAY_STORE_URL` / `VITE_SITE_URL`.
+5. Deploy — Vercel gives you a live `*.vercel.app` URL.
 
 
