@@ -58,3 +58,13 @@ export function saveToRecipeBook(recipe) {
 export function removeFromRecipeBook(id) {
   return request(`/api/recipe-book?id=${id}`, { method: 'DELETE' });
 }
+
+// ---- Public share links ----
+
+export function createShareLink(recipe) {
+  return postJSON('/api/share', recipe);
+}
+
+export function fetchSharedRecipe(id) {
+  return request(`/api/share?id=${id}`);
+}

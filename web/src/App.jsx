@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import FlashMessage from './components/FlashMessage.jsx';
@@ -10,7 +10,7 @@ import Ingredients from './steps/Ingredients.jsx';
 import RecipeList from './steps/RecipeList.jsx';
 import RecipeDetail from './steps/RecipeDetail.jsx';
 import MyRecipes from './steps/MyRecipes.jsx';
-import { fetchIngredients, fetchRecipes } from './api.js';
+import { fetchIngredients, fetchRecipes, fetchSharedRecipe } from './api.js';
 
 const STEP = {
   HOME: 'home',
@@ -19,8 +19,13 @@ const STEP = {
   INGREDIENTS: 'ingredients',
   RECIPES: 'recipes',
   RECIPE_DETAIL: 'recipe_detail',
-  MY_RECIPES: 'my_recipes'
+  MY_RECIPES: 'my_recipes',
+  // A recipe opened from someone else's share link (/r/:id) - no step
+  // progress dots shown, since this visitor didn't go through the flow.
+  SHARED_RECIPE: 'shared_recipe'
 };
+
+const SHARE_LINK_PATH = /^\/r\/(\d+)$/;
 
 // Maps app steps to the 4-dot progress indicator shown above each screen.
 // HOME has no entry - the landing page doesn't show step progress.
@@ -44,11 +49,34 @@ export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [sharedLinkError, setSharedLinkError] = useState('');
+  const [loadingSharedRecipe, setLoadingSharedRecipe] = useState(() => SHARE_LINK_PATH.test(window.location.pathname));
+
+  // On first load, if the URL is a share link (/r/:id), fetch that recipe
+  // and jump straight to it instead of the landing page.
+  useEffect(() => {
+    const match = window.location.pathname.match(SHARE_LINK_PATH);
+    if (!match) return;
+    fetchSharedRecipe(match[1])
+      .then((data) => {
+        setSelectedRecipe(data.recipe);
+        setStep(STEP.SHARED_RECIPE);
+      })
+      .catch((err) => {
+        setSharedLinkError(err.message || 'This shared recipe could not be found.');
+        window.history.replaceState({}, '', '/');
+      })
+      .finally(() => setLoadingSharedRecipe(false));
+  }, []);
 
   function goHome() {
     setStep(STEP.HOME);
     setErrorMessage('');
     setSuccessMessage('');
+    setSharedLinkError('');
+    if (SHARE_LINK_PATH.test(window.location.pathname)) {
+      window.history.replaceState({}, '', '/');
+    }
   }
 
   async function handleCapture(imageBase64) {
@@ -123,11 +151,20 @@ export default function App() {
         {step !== STEP.CAMERA && step !== STEP.INGREDIENTS && (
           <>
             <FlashMessage type="success" message={successMessage} onDismiss={() => setSuccessMessage('')} />
-            <FlashMessage type="danger" message={errorMessage} onDismiss={() => setErrorMessage('')} />
+            <FlashMessage
+              type="danger"
+              message={errorMessage || sharedLinkError}
+              onDismiss={() => {
+                setErrorMessage('');
+                setSharedLinkError('');
+              }}
+            />
           </>
         )}
 
-        {step === STEP.HOME && <Home onStart={() => setStep(STEP.BASIC_INFO)} />}
+        {loadingSharedRecipe && <p className="profile-meta">Loading shared recipe…</p>}
+
+        {step === STEP.HOME && !loadingSharedRecipe && <Home onStart={() => setStep(STEP.BASIC_INFO)} />}
 
         {step === STEP.BASIC_INFO && (
           <BasicInfo
@@ -178,6 +215,18 @@ export default function App() {
 
         {step === STEP.RECIPE_DETAIL && selectedRecipe && (
           <RecipeDetail recipe={selectedRecipe} onGenerateNew={() => setStep(STEP.CAMERA)} onBackHome={goHome} />
+        )}
+
+        {step === STEP.SHARED_RECIPE && selectedRecipe && (
+          <>
+            <p className="hero-banner">
+              <span className="hero-emoji" aria-hidden="true">
+                🔗
+              </span>
+              Someone shared this recipe with you from Leftover to Recipe.
+            </p>
+            <RecipeDetail recipe={selectedRecipe} onGenerateNew={goHome} onBackHome={goHome} backLabel="Back to home" />
+          </>
         )}
 
         {step === STEP.MY_RECIPES && <MyRecipes onBack={goHome} onView={handleViewSavedRecipe} />}
