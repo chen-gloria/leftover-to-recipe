@@ -36,6 +36,20 @@ async function getSql() {
           created_at TIMESTAMPTZ DEFAULT now()
         )
       `;
+      // Public, unauthenticated snapshot of a recipe - created when someone
+      // hits Share, so the "share this recipe" link works for anyone,
+      // logged in or not. Deliberately separate from saved_recipes (which is
+      // private to one account).
+      await sql`
+        CREATE TABLE IF NOT EXISTS shared_recipes (
+          id SERIAL PRIMARY KEY,
+          title TEXT NOT NULL,
+          is_healthy BOOLEAN NOT NULL DEFAULT false,
+          ingredients JSONB NOT NULL,
+          instructions JSONB NOT NULL,
+          created_at TIMESTAMPTZ DEFAULT now()
+        )
+      `;
       return sql;
     })();
   }
@@ -46,8 +60,10 @@ async function getSql() {
 
 const memUsers = new Map(); // email -> user
 const memRecipes = new Map(); // userId -> recipe[]
+const memSharedRecipes = new Map(); // id -> recipe
 let memNextUserId = 1;
 let memNextRecipeId = 1;
+let memNextSharedRecipeId = 1;
 
 // ---------------- public API ----------------
 
@@ -125,6 +141,41 @@ export async function deleteRecipe(userId, recipeId) {
     userId,
     list.filter((r) => r.id !== recipeId)
   );
+}
+
+export async function createSharedRecipe(recipe) {
+  const { title, isHealthy, ingredients, instructions } = recipe;
+  if (hasDb) {
+    const sql = await getSql();
+    const rows = await sql`
+      INSERT INTO shared_recipes (title, is_healthy, ingredients, instructions)
+      VALUES (${title}, ${!!isHealthy}, ${JSON.stringify(ingredients)}::jsonb, ${JSON.stringify(instructions)}::jsonb)
+      RETURNING id, title, is_healthy AS "isHealthy", ingredients, instructions, created_at AS "createdAt"
+    `;
+    return rows[0];
+  }
+  const saved = {
+    id: memNextSharedRecipeId++,
+    title,
+    isHealthy: !!isHealthy,
+    ingredients,
+    instructions,
+    createdAt: new Date().toISOString()
+  };
+  memSharedRecipes.set(saved.id, saved);
+  return saved;
+}
+
+export async function getSharedRecipeById(id) {
+  if (hasDb) {
+    const sql = await getSql();
+    const rows = await sql`
+      SELECT id, title, is_healthy AS "isHealthy", ingredients, instructions, created_at AS "createdAt"
+      FROM shared_recipes WHERE id = ${id}
+    `;
+    return rows[0] || null;
+  }
+  return memSharedRecipes.get(id) || null;
 }
 
 export const usingRealDatabase = hasDb;

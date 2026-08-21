@@ -4,7 +4,7 @@ import ShareModal from '../components/ShareModal.jsx';
 import LoginModal from '../components/LoginModal.jsx';
 import { saveToRecipeBook } from '../api.js';
 
-export default function RecipeDetail({ recipe, onGenerateNew, onBackHome }) {
+export default function RecipeDetail({ recipe, onGenerateNew, onBackHome, backLabel = 'Generate a new recipe' }) {
   const [rating, setRating] = useState(0);
   const [showThankYou, setShowThankYou] = useState(false);
   const [showShare, setShowShare] = useState(false);
@@ -39,7 +39,7 @@ export default function RecipeDetail({ recipe, onGenerateNew, onBackHome }) {
   return (
     <>
       <button type="button" className="link-back" onClick={onGenerateNew}>
-        <Icon name="arrowLeft" size={16} /> Generate a new recipe
+        <Icon name="arrowLeft" size={16} /> {backLabel}
       </button>
 
       <div className="card card-padded" style={{ marginTop: 'var(--space-4)' }}>

@@ -1126,6 +1126,23 @@ input[type='email']:focus {
   margin-top: var(--space-2);
 }
 
+.share-link-row {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.share-link-row input {
+  flex: 1;
+  min-width: 0;
+  border: 1.5px solid var(--color-border) !important;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-sunken) !important;
+  padding: 8px 12px !important;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
 .share-intent-row {
   display: flex;
   flex-wrap: wrap;
